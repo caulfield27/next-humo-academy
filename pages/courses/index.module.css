@@ -1,0 +1,207 @@
+.cards_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+}
+.cards_wrapper{ 
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.loading{
+    margin-top: 80px;
+}
+
+.courses_header{
+    margin-bottom: 20px;
+}
+
+.courses_header h1{
+    color: #FB6D48;
+}
+
+.courses_filter{
+    height: 55px;
+    background: #F3F4F6;
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 5px;
+    margin-bottom: 40px;
+}
+.courses_filter input{
+    background: white;
+    width: 360px;
+    height: 25px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px;
+    padding-left: 35px;
+    border: 1px solid gainsboro;
+}
+
+.courses_filter input::placeholder{
+    color: rgb(158, 157, 157);
+}
+
+.courses_filter input[type="text"] {
+    background-image: url('https://icones.pro/wp-content/uploads/2021/02/loupe-et-icone-de-recherche-de-couleur-grise.png'); 
+    background-size: 25px;
+    letter-spacing: normal; 
+    background-repeat: no-repeat;
+    background-position: left 5px center; 
+}
+
+.courses_filter select {
+    cursor: pointer;
+    background: white;
+    width: 250px;
+    height: 43px; 
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px;
+    padding-left: 35px;
+    border: 1px solid gainsboro;
+    appearance: none; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+
+.courses_filter select option[disabled]:first-child {
+    color: rgb(158, 157, 157);
+}
+
+.card{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    width: 400px;
+    height: 250px;
+    background: transparent;
+    border: 1px solid gainsboro;
+    border-radius: 8px;
+    padding: 15px;  
+}
+
+.card:hover{
+    box-shadow: 0px 0px 8px -2px orangered;
+    scale: 1.01;
+}
+
+.card_right img{
+    width: 100px;
+ 
+}
+
+.card_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 70px;
+}
+
+.card_left h2{
+    letter-spacing: 1px;
+    color: rgb(45, 47, 49);
+    margin-bottom:0 !important;
+}
+
+.mentor{
+    font-size: smaller;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgb(143, 142, 142);
+}
+
+.languages_wrap p{
+    margin-bottom: 5px;
+}
+
+.language_img{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.language_img img{
+    width: 30px;
+}
+
+.orange{
+    background: rgb(33, 33, 33);
+    width: max-content;
+    height: max-content;
+    padding: 4px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    padding: 0 10px 0px 10px;
+    margin-top: 25px;
+}
+
+.cards_favorites{
+    color:gainsboro;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: all 0.4s ease-out;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.cards_favorites:hover{
+    border: 1px solid grey;
+    background: ghostwhite;
+}
+
+.cards_favorites:hover .favoriteCardText{
+    display: block;
+}
+
+.favoriteCardText{
+    position: absolute;
+    top: -13px;
+    right: -30px;
+    font-size: 13px;
+    display: none;
+}
+
+.favCard_active{
+    color: rgb(211, 0, 0) !important
+}
+
+.display_none{
+    display: none;
+}
+.display_block{
+    display: block;
+}
+
+@media screen and (max-width:1000px) {
+    .cards_wrapper{
+        margin-top: 150px;
+    }
+    .adaptive_wrapper{
+        margin-top: 340px !important;
+    }
+    
+}

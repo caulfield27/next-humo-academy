@@ -1,0 +1,125 @@
+.jsQuiz_wrapper{
+    max-width: 1100px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.quiz_container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.question{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.timer_wrap{
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+
+
+.quiz_content{
+    width: 700px;
+    height: 400px;
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.quiz_header span{
+    color: black;
+    font-weight: bold;
+}
+
+
+.quiz_header{
+    width: 100%;
+    height: 50px;
+    background: #E8E8E8;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+    padding-left: 20px;
+    padding: 20px;
+}
+
+.quiz_body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+    margin-left: 35px;
+
+}
+
+.quiz_footer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: -5px;
+}
+
+.options_wrap{
+    width: 100%;
+}
+
+.quiz_options{
+    background: whitesmoke;
+    width: 100%;
+    border-bottom: 1px solid gainsboro;
+}
+
+.quiz_options:hover{
+    background: ghostwhite;
+}
+
+.id{
+    color: orangered !important;
+}
+@media screen and (max-width: 1000px) {
+    .jsQuiz_wrapper{
+        margin-top: 150px;
+    }
+    .dropdown_active{
+        margin-top: 340px !important;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .quiz_content{
+        width: fit-content;
+        height: 400px;
+        border-radius: 5px;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 25px;
+    }
+}

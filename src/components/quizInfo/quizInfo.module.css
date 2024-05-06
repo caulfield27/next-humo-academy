@@ -1,0 +1,25 @@
+.quiz_container_header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.quiz_container_header span{
+    font-weight: 600;
+}
+
+.quiz_container_header img{
+    width: 60px;
+}
+
+@media screen and (max-width: 350px) {
+    .quiz_container_header{
+        flex-direction: column;
+    }
+    .quiz_container_header{
+        margin-bottom: 50px;
+    }
+    
+}

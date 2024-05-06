@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+
+#root{
+    width: 100%;
+    height: 100vh;
+}
+
+.app-container{
+    width: 100%;    
+    height: 100vh;
+}
+
+.pages-content{
+    margin-left: 300px;
+    overflow-x: hidden;
+}
+
+   /* MEDIA REQUESTs */
+@media screen and (max-width:1000px){
+    .pages-content{
+        margin-left:0;
+        flex: 1;
+        overflow-x: hidden;
+    }
+    
+    
+}
