@@ -1,0 +1,55 @@
+{
+    "courses":[
+        {
+            "name":"Front-end pro ",
+            "mentor":"Daler Kamolov",
+            "languages":["https://itproger.com/img/tests/node-js.svg",
+                            "https://itproger.com/img/tests/react-js.svg",
+                            "https://itproger.com/img/tests/html.svg"],
+            "image":"https://itproger.com/img/tests/react-js.svg",
+            "duration": "2 month",
+            "price": "free",
+            "status": "offline",
+            "courseStart": "9 may",
+            "category": "Front-end",
+            "id": 1
+        },
+        {
+            "name":"Python analytics",
+            "mentor":"Daler Кamolov",
+            "languages":["https://itproger.com/img/tests/python.svg"],
+            "image":"https://itproger.com/img/tests/python.svg",
+            "duration": "2 month",
+            "price": "free",
+            "status": "offline",
+            "courseStart": "20 april",
+            "category": "python",
+            "id": 2
+        },
+        {
+            "name":"Golang for beginners",
+            "mentor":"Daler Kamolov",
+            "languages":["https://itproger.com/img/tests/1606672010.svg","https://itproger.com/img/tests/sql.svg"],
+            "image":"https://itproger.com/img/tests/1606672010.svg",
+            "duration": "3 month",
+            "price": "free",
+            "status": "offline",
+            "courseStart": "17 april",
+            "category": "golang",
+            "id": 3
+        },
+        {
+            "name":"Android Development",
+            "mentor": "Daler Kamolov",
+            "languages":["https://itproger.com/img/tests/android.svg",
+                        "https://itproger.com/img/tests/1567591805.svg"],
+            "image":"https://itproger.com/img/tests/android.svg",
+            "duration": "3 month",
+            "price": "free",
+            "status": "offline",
+            "courseStart": "1 may",
+            "category": "android",
+            "id": 4
+        }
+    ]
+}

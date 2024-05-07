@@ -1,0 +1,308 @@
+{
+    "books":[
+        {
+            "name":"You don`t know JS",
+            "author": "Kyle Simpson",
+            "image":"https://m.media-amazon.com/images/I/81zWsOMWE4L._AC_UF1000,1000_QL80_.jpg",
+            "pdf":"https://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.7,
+            "released": "2014 y.",
+            "description": "It seems like there's never been as much widespread desire before for a better way to deeply learn the fundamentals of JavaScript. But with a million blogs, books, and videos out there, just where do you START? Look no further!The worldwide best selling 'You Don't Know JS' book series is back for a 2nd edition: 'You Don't Know JS Yet'. All 6 books are brand new, rewritten to cover all sides of JS for 2020 and beyond.'Get Started' prepares you for the journey ahead, first surveying the language then detailing how the rest of the You Don't Know JS Yet book series guides you to knowing JS more deeply.",
+            "id": 1
+        },
+        {
+            "name":"The progmatic programmer",
+            "author": "Andrew Humd & David Thomas",
+            "image":"https://m.media-amazon.com/images/I/61ztlXgCmpL._SY522_.jpg",
+            "pdf":"https://www.cin.ufpe.br/~cavmj/104The%20Pragmatic%20Programmer,%20From%20Journeyman%20To%20Master%20-%20Andrew%20Hunt,%20David%20Thomas%20-%20Addison%20Wesley%20-%201999.pdf",
+            "rating": 4.8,
+            "released": "october 1999 y.",
+            "description": "The Pragmatic Programmer is one of those rare tech books you’ll read, re-read, and read again over the years. Whether you’re new to the field or an experienced practitioner, you’ll come away with fresh insights each and every time.Dave Thomas and Andy Hunt wrote the first edition of this influential book in 1999 to help their clients create better software and rediscover the joy of coding. These lessons have helped a generation of programmers examine the very essence of software development, independent of any particular language, framework, or methodology, and the Pragmatic philosophy has spawned hundreds of books, screencasts, and audio books, as well as thousands of careers and success stories.",
+            "id":2
+        },
+        {
+            "name":"Code",
+            "author": "Charles Petzold",
+            "image":"https://m.media-amazon.com/images/I/51zzPHbnhzL._SY522_.jpg",
+            "pdf":"https://delong.typepad.com/files/code.pdf",
+            "rating": 4.7,
+            "released": "29 september of 1999 y.",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use.",
+            "id": 3
+
+        },
+        {
+            "name":"Code Complete",
+            "author": "Steve McConnell",
+            "image":"https://m.media-amazon.com/images/I/61GzazUmKyL._SY522_.jpg",
+            "pdf":"https://people.engr.tamu.edu/slupoli/notes/ProgrammingStudio/supplements/Code%20Complete%202nd.pdf",
+            "rating": 4.6,
+            "released": "1993 y.",
+            "description": "Widely considered one of the best practical guides to programming, Steve McConnell’s original code complete has been helping developers write better software for more than a decade. Now this classic book has been fully updated and revised with leading-edge practices—and hundreds of new code samples—illustrating the art and science of software construction. Capturing the body of knowledge available from research, academia, and everyday commercial practice, McConnell synthesizes the most effective techniques and must-know principles into clear, pragmatic guidance. No matter what your experience level, development environment, or project size, this book will inform and stimulate your thinking—and help you build the highest quality code.",
+            "Id": 4
+        },
+        {
+            "name":"Essential TypeScript",
+            "author": "Adam Freeman",
+            "image":"https://m.media-amazon.com/images/I/61orYC7eAjL._SY522_.jpg",
+            "pdf":"https://people.engr.tamu.edu/slupoli/notes/ProgrammingStudio/supplements/Code%20Complete%202nd.pdf",
+            "rating": 4.1,
+            "released": "april 2021",
+            "description": "TypeScript enhances JavaScript with static typing, while keeping all the JS flexibility you know and love! It’s the perfect choice for any developer looking to improve the predictability and reliability of their code. Essential TypeScript 5, Third Edition teaches you how to get the most out of TypeScript 5 for a consistent, dependable development experience.",
+            "id": 5
+        },
+        {
+            "name":"The Self-Taught programmer",
+            "author": "Cory Althoff",
+            "image":"https://m.media-amazon.com/images/I/51+Z8QVq+WL._SY522_.jpg",
+            "pdf":"https://books-library.net/files/books-library.net-11301817Az7X6.pdf",
+            "rating": 4.5,
+            "released": "2017",
+            "description": "I am a self-taught programmer. After a year of self-study, I learned to program well enough to land a job as a software engineer II at eBay. Once I got there, I realized I was severely under-prepared. I was overwhelmed by the amount of things I needed to know but hadn't learned yet. My journey learning to program, and my experience at my first job as a software engineer were the inspiration for this book.",
+            "id":6
+        },
+        {
+            "name":"Python Programming and SQL",
+            "author": "Mark Reed",
+            "image":"https://m.media-amazon.com/images/I/61jXSsH1M8L._SY522_.jpg",
+            "pdf":"https://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.5,
+            "released":"2020",
+            "description": " Whether you're a complete beginner or an experienced programmer, this #1 bestseller book is designed to make your learning journey simple, regardless of your current skills. It aims to guide you seamlessly through the content and fast-track your career in no time.",
+            "id":7
+
+        },
+        {
+            "name":"Learning GO",
+            "author": "Jon Bodner",
+            "image":"https://m.media-amazon.com/images/I/91yMrjrKOmL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://miek.nl/files/go/Learning-Go-latest.pdf",
+            "rating": 4.5,
+            "released": "2021",
+            "description": "Go has rapidly become the preferred language for building web services. Plenty of tutorials are available to teach Go's syntax to developers with experience in other programming languages, but tutorials aren't enough. They don't teach Go's idioms, so developers end up recreating patterns that don't make sense in a Go context. This practical guide provides the essential background you need to write clear and idiomatic Go.No matter your level of experience, you'll learn how to think like a Go developer. Author Jon Bodner introduces the design patterns experienced Go developers have adopted and explores the rationale for using them. This updated edition also shows you how Go's generics support fits into the language.",
+            "id":8
+        },
+        {
+            "name":"Python crush course",
+            "author": "Eric Matthes",
+            "image":"https://m.media-amazon.com/images/I/81py-nCTfrL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://bedford-computing.co.uk/learning/wp-content/uploads/2015/10/No.Starch.Python.Oct_.2015.ISBN_.1593276036.pdfhttps://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.8,
+            "released": "3rd may of 2019",
+            "description": "Python Crash Course is the world’s best-selling guide to the Python programming language. This fast-paced, thorough introduction will have you writing programs, solving problems, and developing functioning applications in no time.You’ll start by learning basic programming concepts, such as variables, lists, classes, and loops, and practice writing clean code with exercises for each topic.",
+            "id":9
+        },
+        {
+            "name":"A byte of python",
+            "author": "Swaroop S.H.",
+            "image":"https://m.media-amazon.com/images/I/41JeFdBQlDL._SY522_.jpg",
+            "pdf":"https://www.ibiblio.org/swaroopch/byteofpython/files/120/byteofpython_120.pdf",
+            "rating": 4.2,
+            "released": "2005",
+            "description": "‘A Byte of Python’ is a free book on programming using the Python language. It serves as a tutorial or guide to the Python language for a beginner audience. If all you know about computers is how to save text files, then this is the book for you. This book is written for the latest Python 3, even though Python 2 is the commonly found version of Python today (read more about it in Python 2 versus 3 section).",
+            "id":10
+        },
+        {
+            "name":"The road to react",
+            "author": "Robin Wieruch",
+            "image":"https://m.media-amazon.com/images/I/51j1nrM7ETL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"http://gsl-archive.mit.edu/media/programs/rwanda-summer-2018/materials/the-road-to-learn-react.pdf",
+            "rating": 4.5,
+            "released": "15th november of 2017",
+            "description": "'The Road to React' made its debut in 2016, and since then, I've almost rewritten it annually. This book teaches the core principles of React, guiding you through building a practical application in pure React without complex tooling. The book covers everything from setting up the project to deploying it on a server. Each chapter includes additional recommended reading and exercises. By the end, you'll have the skills to develop your own React applications.",
+            "id":11
+        },
+        {
+            "name":"Learn react with TypeScript",
+            "author": "Carl Rippon",
+            "image":"https://m.media-amazon.com/images/I/51+xOpy7QML._AC_UY327_QL65_.jpg",
+            "pdf":"https://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.7,
+            "released": "3rd march of 2023",
+            "description": "Reading, navigating, and debugging a large frontend codebase is a major issue faced by frontend developers. This book is designed to help web developers like you learn about ReactJS and TypeScript, both of which power large-scale apps for many organizations.This second edition of Learn React with TypeScript is updated, enhanced, and improved to cover new features of React 18 including hooks, state management libraries, and features of TypeScript 4. The book will enable you to create well-structured and reusable React components that are easy to read and maintain, leveraging modern design patterns.",
+            "id":12
+        },
+        {
+            "name":"Java Script and jQuery",
+            "author": "Jon Ducket"  ,
+            "image":"https://m.media-amazon.com/images/I/61u7pEHMZUL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://bedford-computing.co.uk/learning/wp-content/uploads/2015/10/JavaScript-and-JQuery-Interactive-Front-End-Web-Development-Introduction.pdf",
+            "rating": 4.6,
+            "released": "2013 y",
+            "description": "In JavaScript and jQuery: Interactive Front-End Development, best-selling author Jon Duckett delivers a fully illustrated guide to making your websites more interactive and your interfaces more interesting and intuitive. In the book, you’ll explore basic programming concepts that assume no prior knowledge of programming beyond an ability to create a web page using HTML & CSS.",
+            "id":13
+        },
+        {
+            "name":"Distribute system with NODE.js",
+            "author": "Hunter Thomas",
+            "image":"https://m.media-amazon.com/images/I/81S87xwKCvL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.4,
+            "released": "2020",
+            "description": "Many companies, from startups to Fortune 500 companies alike, use Node.js to build performant backend services. And engineers love Node.js for its approachable API and familiar syntax. Backed by the world's largest package repository, Node's enterprise foothold is only expected to grow.In this hands-on guide, author Thomas Hunter II proves that Node.js is just as capable as traditional enterprise platforms for building services that are observable, scalable, and resilient. Intermediate to advanced Node.js developers will find themselves integrating application code with a breadth of tooling from each layer of a modern service stack.",
+            "id":14
+        },
+        {
+            "name":"Clean Code",
+            "author": "Robert C.Martin",
+            "image":"https://m.media-amazon.com/images/I/41bOkXnNBjL._SY445_SX342_.jpg",
+            "pdf":"https://ptgmedia.pearsoncmg.com/images/9780132350884/samplepages/9780132350884.pdf",
+            "rating": 4.7,
+            "released": "1st august of 2008",
+            "description":"Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way. Noted software expert Robert C. Martin, presents a revolutionary paradigm with Clean Code: A Handbook of Agile Software Craftsmanship. Martin, who has helped bring agile principles from a practitioner’s point of view to tens of thousands of programmers, has teamed up with his colleagues from Object Mentor to distill their best agile practice of cleaning code “on the fly” into a book that will instill within you the values of software craftsman, and make you a better programmer―but only if you work at it.",
+            "id":15
+        },
+        {
+            "name":"HTML and CSS QuickStart Guide",
+            "author": "David DuRocher",
+            "image":"https://m.media-amazon.com/images/I/61XVS77279L._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://ptgmedia.pearsoncmg.com/images/9780321928832/samplepages/0321928830.pdf",
+            "rating": 4.5,
+            "released": "2021",
+            "description": "Experienced developers know that a mastery of HTML and CSS fundamentals is not only an essential web design skill, but also the solid foundation of a robust coding skillset. In HTML & CSS QuickStart Guide author, instructor, and 10+ year Fortune 500 tech company veteran David DuRocher breaks down HTML5 and CSS3 fundamentals into manageable, practical, and engaging segments designed for first-time developers.",
+            "id":16
+        },
+        {
+            "name":"Go Programming Cookbook",
+            "author": "Ian Taylor",
+            "image":"https://m.media-amazon.com/images/I/61MAKC4OoaL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://edu.anarcho-copy.org/Programming%20Languages/Go/go-programming-cookbook-readable-applications-2nd.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":17 
+
+        },
+        {
+            "name":"Head First HTML and CSS",
+            "author": "Elisabeth Robson",
+            "image":"https://m.media-amazon.com/images/I/91JnhRID+5L._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"http://artsites.ucsc.edu/sdaniel/170a_2014/Head_First_HTML_CSS_XHTML.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":18
+        },
+        {
+            "name":"Web Development with Node and Express",
+            "author": "Ethan Brown",
+            "image":"https://m.media-amazon.com/images/I/81sOrykcTKL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://www.vanmeegern.de/fileadmin/user_upload/PDF/Web_Development_with_Node_Express.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":19
+        },
+        {
+            "name":"MongoDB Data Modeling and Schema Design",
+            "author": "Daniel Coupal, Pascal Desmarets",
+            "image":"https://m.media-amazon.com/images/I/6149E17JbaL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://www.percona.com/sites/default/files/presentations/Percona-Webinar_MongoDB-Schema-Design.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":20
+        },
+        {
+            "name":"C++ Programming Language",
+            "author": "Bjarne Stroustrup",
+            "image":"https://m.media-amazon.com/images/I/71uN0nVAkvL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://chenweixiang.github.io/docs/The_C++_Programming_Language_4th_Edition_Bjarne_Stroustrup.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":21
+        },
+        {
+            "name":"The C# Player's Guide",
+            "author": "R.B.Whitaker",
+            "image":"https://m.media-amazon.com/images/I/619vzxml9jL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://csharpplayersguide.com/TheCSharpPlayersGuide-5thEdition-Sample.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":22
+        },
+        {
+            "name":"Head First Java: A Brain-Friendly Guide",
+            "author": "Kathy Sierra, Bert Bates",
+            "image":"https://m.media-amazon.com/images/I/81wAshyxQyL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://www.rcsdk12.org/cms/lib/NY01001156/Centricity/Domain/4951/Head_First_Java_Second_Edition.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":23
+        },
+        {
+            "name":"Social Engineering: The Science of Human Hacking",
+            "author": "Christopher Hadnagy",
+            "image":"https://m.media-amazon.com/images/I/71OtFTUan1L._SY522_.jpg",
+            "pdf":"https://theswissbay.ch/pdf/Books/Computer%20science/socialengineering_thescienceofhumanhacking_2ndedition.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":24
+        },
+        {
+            "name":"Practical SQL",
+            "author": "Anthony DeBarros",
+            "image":"https://m.media-amazon.com/images/I/81QJPT65rhL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://someplace-else.neocities.org/books/Practical%20SQL.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":25
+        },
+        {
+            "name":"JavaScript: The Definitive Guide",
+            "author": "David Flanagan",
+            "image":"https://m.media-amazon.com/images/I/91hUer84PpL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://pepa.holla.cz/wp-content/uploads/2016/08/JavaScript-The-Definitive-Guide-6th-Edition.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":26
+        },
+        {
+            "name":"A Smarter Way to Learn JavaScript",
+            "author": "Mark Myers",
+            "image":"https://m.media-amazon.com/images/I/615kVP9zG1L._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://wccftech.com/wp-content/uploads/2014/10/JavaScript.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":27
+        },
+        {
+            "name":"Hacking APIs",
+            "author": "Corey J.Ball",
+            "image":"https://m.media-amazon.com/images/I/71Ik2OBSPVL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://xiaoguo.net/~books/Program/You_Dont_Know_JS_Up_and_Going.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":28
+        },
+        {
+            "name":"Learning Redux",
+            "author": "Daniel Bugl",
+            "image":"https://m.media-amazon.com/images/I/61JydUByk1L._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://www.dsspp.sk/assets/redux-book.pdf",
+            "rating": 4.5,
+            "released": "2014",
+            "description": "For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":29
+        },
+        {
+            "name":"Algorithms (4th Edition)",
+            "author": "Robert Sedgewick and Kevin Wayne",
+            "image":"https://m.media-amazon.com/images/I/61-8ZU7X3UL._AC_UY327_FMwebp_QL65_.jpg",
+            "pdf":"https://dsp-book.narod.ru/Algorithms.pdf",
+            "rating": 4.5,
+            "released":"2014",
+            "description":"For more than 20 years, readers have delighted in Charles Petzold's illuminating story of the secret inner life of computers, and now he has revised it for this new age of computing. Cleverly illustrated and easy to understand, this is the book that cracks the mystery. You'll discover what flashlights, black cats, seesaws, and the ride of Paul Revere can teach you about computing, and how human ingenuity and our compulsion to communicate have shaped every electronic device we use",
+            "id":30
+        }
+        
+    ]
+}
