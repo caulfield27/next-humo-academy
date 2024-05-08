@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"; 
-import { getApi, setCurrentBook, setBooksModal } from "@/src/store/features/books/books";
+import { getApi, setCurrentBook, setBooksModal, setUserFavBooks } from "@/src/store/features/books/books";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -11,16 +11,27 @@ import useDispatchHook from "@/src/hooks/dispatchHook";
 import { books } from "@/src/store/features/books/booksInterfaces";
 import useSelectorHook from "@/src/hooks/selectorHook";
 import BooksModal from "@/src/components/booksModal/booksModal";
-
 const Library = () => {
     const dispatch = useDispatchHook()
     const {booksList, favorites, dropdown, loading } = useSelectorHook((state)=> state.books);
     const [searchValue, setSeacrhValue] = useState('')
     const [page, setPage] = useState(1)
+    const isAuth = useSelectorHook((state)=> state.auth.isAuth)
     useEffect(()=>{
         dispatch(getApi(page))
         
     },[dispatch, page])
+
+    useEffect(()=>{
+        if(isAuth){
+            const getStorage = localStorage.getItem('favorites')
+            if (getStorage) {
+                const parsedBooks = JSON.parse(getStorage)
+                dispatch(setUserFavBooks(parsedBooks))
+            }
+        }
+    
+    }, [dispatch, isAuth])
 
     function handleRead(e:any){
         window.open(e.target.value, '_blank')

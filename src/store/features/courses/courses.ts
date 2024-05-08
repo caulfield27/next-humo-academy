@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { coursesType } from "./coursesType";
 
-const coursesFromLocalStorage = typeof window !== 'undefined' ? localStorage.getItem('favCourses') : null;
 
 interface courses{
     favoriteCourses:coursesType[],
@@ -9,7 +8,7 @@ interface courses{
 }
 
 const initialState:courses = {
-    favoriteCourses:coursesFromLocalStorage ? JSON.parse(coursesFromLocalStorage) : [],
+    favoriteCourses: [],
     courseModal: false
 }
 

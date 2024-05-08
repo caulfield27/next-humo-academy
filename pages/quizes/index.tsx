@@ -21,7 +21,7 @@ const Quizes = () => {
                     {quizes.map((quiz, ind) => {
                         return <div className={styles.quiz_card} key={ind + 1} onClick={() => OpenQuiz(quiz)}>
                             <span className={styles.quiz_name}>{quiz.name}</span>
-                            <img src={quiz.img} alt="" />
+                            <img src={quiz.img} alt={quiz.name} />
                             <span>complexity:</span>
                             <Rating className={styles.raiting} name="quiz-complex" value={quiz.complexity} precision={0.5} readOnly />
                         </div>

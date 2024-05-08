@@ -1,24 +1,31 @@
 "use client"
 
 import styles from './favorites.module.css'
-import { removeFavorite } from '@/src/store/features/books/books';
+import { getUserFavorites, removeFavorite } from '@/src/store/features/books/books';
 import useDispatchHook from '@/src/hooks/dispatchHook';
 import useSelectorHook from '@/src/hooks/selectorHook';
-import { books } from '@/src/store/features/books/booksInterfaces';
+import { IFavBooks, books } from '@/src/store/features/books/booksInterfaces';
+
 
 const Favorites = () => {
     const dispatch = useDispatchHook()
     const favoriteBooks = useSelectorHook((state)=> state.books.favorites)
     const dropdown = useSelectorHook((state)=> state.books.dropdown)
-
-
+   
     const handleRead = (event: any) =>{
-        window.open(event.target.value)
+        window.open(event.target.value, '_blank')
     }
 
     const handleDelete = (currentBook:books)=>{
-        dispatch(removeFavorite(currentBook))
+        const filtered = favoriteBooks.filter((book) => book.currentBook.id !== currentBook.id)
+        const getFavStorage = localStorage.getItem('favorites')
+        if(getFavStorage){
+            const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== currentBook.id)
+            dispatch(removeFavorite(removedBook))
+        }
+        dispatch(getUserFavorites(filtered))
     }
+
 
     return(
         <>
@@ -37,15 +44,15 @@ const Favorites = () => {
                         <div className={styles.favorites_container}>
                             {favoriteBooks.map((book, ind) => {
                                 return <div key={ind + 1} className={styles.favorite_card}>
-                                    <img src={book.image} alt={book.name} />
+                                    <img src={book.currentBook.image} alt={book.currentBook.name} />
                                     <div className={styles.favoriteCard_content}>
                                         <div className={styles.favorite_text}>
-                                            <span className={styles.favorite_name}>{book.name}</span>
-                                            <span className={styles.favorite_author}>{book.author}</span>
+                                            <span className={styles.favorite_name}>{book.currentBook.name}</span>
+                                            <span className={styles.favorite_author}>{book.currentBook.author}</span>
                                         </div>
                                         <div className={styles.favorite_button}>
-                                            <button value={book.pdf} className={styles.read} onClick={handleRead}>read</button>
-                                            <button className={styles.delete} onClick={() => handleDelete(book)}>delete</button>
+                                            <button value={book.currentBook.pdf} className={styles.read} onClick={handleRead}>read</button>
+                                            <button className={styles.delete} onClick={() => handleDelete(book.currentBook)}>delete</button>
                                         </div>
                                     </div>
                                 </div>

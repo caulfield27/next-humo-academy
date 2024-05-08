@@ -10,7 +10,7 @@ import { IUserItem } from '@/src/store/features/auth/auth';
 import LoginIcon from '@mui/icons-material/Login';
 import useSelectorHook from '@/src/hooks/selectorHook';
 import useDispatchHook from '@/src/hooks/dispatchHook';
-import { setDropdown } from '@/src/store/features/books/books';
+import { resetFavorites, setDropdown } from '@/src/store/features/books/books';
 import { Avatar, IconButton, Menu, MenuItem, Divider, ListItemIcon } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
@@ -44,6 +44,7 @@ const LogedSidebar = () => {
     const handleLogOut = () => {
         setAnchorEl(null)
         dispatch(logOut())
+        dispatch(resetFavorites())
         Swal.fire({
             text: 'you loged out from your account',
             icon: 'info'

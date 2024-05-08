@@ -15,5 +15,9 @@ export interface init{
     booksModal:boolean,
     dropdown: boolean,
     currentBook: books,
-    favorites: books[]
+    favorites: IFavBooks[]
+}
+export interface IFavBooks{
+    userToken:string,
+    currentBook:books
 }

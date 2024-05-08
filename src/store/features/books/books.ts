@@ -1,8 +1,5 @@
 import { ThunkAction, createSlice, Action } from "@reduxjs/toolkit";
-import { init } from "./booksInterfaces";
-
-
-const favoritesFromLocalStorage = typeof window !== 'undefined' ? localStorage.getItem('favorites') : null;
+import { IFavBooks, books, init } from "./booksInterfaces";
 
 export const getApi = (page:any):ThunkAction<void, unknown,unknown,Action<string>>=> async (dispatch:any)=>{
     try{
@@ -24,7 +21,7 @@ const initialState:init = {
     booksModal: false,
     dropdown: false,
     currentBook:{name:'',author:'',image:'',pdf:'',rating:0,released:'',description:'',id:0},
-    favorites: favoritesFromLocalStorage ? JSON.parse(favoritesFromLocalStorage) : [],
+    favorites: [],
 };
 
 const booksSlice = createSlice({
@@ -44,23 +41,38 @@ const booksSlice = createSlice({
             state.currentBook = payload
         },
         setFavorites: (state, {payload})=>{
-            state.favorites.push(payload)
-            localStorage.setItem('favorites', JSON.stringify(state.favorites))
+            localStorage.setItem('favorites', JSON.stringify(payload))
         },
         removeFavorite: (state, {payload})=>{
-            state.favorites = state.favorites.filter((book: { id: number; }) => book.id !== payload.id)
-            localStorage.setItem('favorites', JSON.stringify(state.favorites))
+            localStorage.setItem('favorites', JSON.stringify(payload))
         },
         setDropdown: (state, {payload})=>{
             state.dropdown = payload
+        },
+        getUserFavorites: (state, {payload})=>{
+            state.favorites = payload
+        },
+        resetFavorites: (state) =>{
+            state.favorites = []
         }
        
     }
 })
 
+
+
+
+export const setUserFavBooks = (favBooks:IFavBooks[]) => (dispatch:Function, getState:Function) => {
+    const {auth} = getState()
+    const currentUser = auth.currentUser
+    const  customFav = favBooks.filter(book => book.userToken === currentUser[0].userToken)
+    dispatch(getUserFavorites(customFav))
+}
+
+
 export const {setBooks, setDownload, setBooksModal, 
-    setCurrentBook, setFavorites, removeFavorite,
-    setDropdown} = booksSlice.actions
+    setCurrentBook, removeFavorite,setFavorites,
+    setDropdown,getUserFavorites, resetFavorites} = booksSlice.actions
 
 export default booksSlice
 

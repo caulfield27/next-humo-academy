@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { getToken } from "@/src/utils/token";
 import Swal from "sweetalert2";
+import { IFavBooks, books } from "../books/booksInterfaces";
 
 
 const addUsersToStorage = (users:{}[]) =>{
@@ -55,11 +55,13 @@ const authSlice = createSlice({
         },
         checkIsAuth: (state, {payload})=>{
                 state.isAuth = payload
-            }
+        },
         
         
     }
 })
+
+
 
 
 export const handleLogin = (email:string, password:string, 
@@ -97,8 +99,18 @@ export const handleLogin = (email:string, password:string,
 export const handleSignup = (email:string, fullName:string, password:string,
     navigate:any) => {
     return async (dispatch:Function, getState:Function) => {
+        // const favoritesFromLocalStorage = typeof window !== 'undefined' ? localStorage.getItem('favorites') : null;
+        const userFavorites:any = []
         const { users } = getState().auth; 
         const existingUser = users.find((user:IUserItem) => user.userEmail === email);
+        
+        interface IlogedUser{
+            userEmail:string,
+            userName: string,
+            userPassword: string,
+            userToken:string,
+            userFavoriteBooks:books[] | string,
+        }
         if (existingUser) {
             Swal.fire({
                 title: 'Sign up error',
@@ -107,12 +119,13 @@ export const handleSignup = (email:string, fullName:string, password:string,
                 confirmButtonText: 'try again'
             })
         } else {
-            const signedUser = {
+            const signedUser:IlogedUser = {
                 userEmail: email,
                 userName: fullName, 
                 userPassword: password,
-                userToken: `token!*${email}${password}`
-            };
+                userToken: `token!*${email}${password}`,
+                userFavoriteBooks: [],
+            }   
             dispatch(setUsers(signedUser));
             navigate.push('/login')
             Swal.fire({ 
