@@ -129,8 +129,14 @@
 
 }
 
-.searchInput{
+.searchInput{       
     width: 300px;
+    outline: none;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #FB6D48;
+    
+
 }
 
 .favorite_wrap{

@@ -1,19 +1,6 @@
 import { ThunkAction, createSlice, Action } from "@reduxjs/toolkit";
 import { IFavBooks, books, init } from "./booksInterfaces";
 
-export const getApi = (page:any):ThunkAction<void, unknown,unknown,Action<string>>=> async (dispatch:any)=>{
-    try{
-        dispatch(setDownload(true))
-        const response = await fetch(`http://localhost:3001/books?_page=${page}&_per_page=10`);
-        const data = await response.json();
-        dispatch(setBooks(data.data));
-    }catch(e){
-        console.log(e);
-    }finally{
-        dispatch(setDownload(false));
-    }
-}
-
 
 const initialState:init = {
     booksList: [],
@@ -28,12 +15,6 @@ const booksSlice = createSlice({
     name:'books',
     initialState,
     reducers:{
-        setBooks:(state, {payload})=>{
-            state.booksList = payload
-        },
-        setDownload: (state, {payload})=>{
-            state.loading = payload
-        },
         setBooksModal: (state, {payload})=>{
             state.booksModal = payload
         },
@@ -70,7 +51,7 @@ export const setUserFavBooks = (favBooks:IFavBooks[]) => (dispatch:Function, get
 }
 
 
-export const {setBooks, setDownload, setBooksModal, 
+export const { setBooksModal, 
     setCurrentBook, removeFavorite,setFavorites,
     setDropdown,getUserFavorites, resetFavorites} = booksSlice.actions
 

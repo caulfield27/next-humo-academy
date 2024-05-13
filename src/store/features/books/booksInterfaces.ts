@@ -3,7 +3,7 @@ export interface books{
     author:string,
     image: string,
     pdf: string,
-    rating: number,
+    rating: number | null,
     released: string,
     description: string,
     id: number

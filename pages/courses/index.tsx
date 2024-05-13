@@ -1,8 +1,7 @@
 import styles from './index.module.css'
 import useSelectorHook from "@/src/hooks/selectorHook";
 import useDispatchHook from "@/src/hooks/dispatchHook";
-import { fetchCourses } from "@/src/store/features/courses/Getcourses";
-import { useEffect, useState } from "react";
+import useSWR from 'swr';
 import { CircularProgress } from '@mui/material';
 import {Button} from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -10,29 +9,23 @@ import { removeFavCourse, setFavCourse, setCourseModal } from '@/src/store/featu
 import CourseModal from '@/src/components/enterCourseModal/enterCourse';
 import Swal from 'sweetalert2'
 import { coursesType } from '@/src/store/features/courses/coursesType';
-import Link from 'next/link';
-
-
+import { getCourses } from '@/src/utils/api';
+import { useState } from 'react';
 
 const CoursesCard = () => {
     const dispatch = useDispatchHook()
     const dropdown = useSelectorHook((state)=> state.books.dropdown)
-    const isLoading = useSelectorHook((state)=> state.getCourses.isLoading) 
-    const courses = useSelectorHook((state)=> state.getCourses.courses)
     const favCourses = useSelectorHook((state)=> state.courses.favoriteCourses)
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const isAuth = useSelectorHook((state)=> state.auth.isAuth)
-    const filteredCourses = courses.filter((course) => {
+    const {data,isLoading } = useSWR<coursesType[]>('http://localhost:3002/courses', getCourses)
+    const courses = data
+    const filteredCourses = courses === undefined ? [] : courses.filter((course) => {
         const matchesSearch = course.name.toLowerCase().includes(search.toLowerCase());
         const matchesCategory = !selectedCategory || course.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
-
-    
-    useEffect(()=>{
-        dispatch(fetchCourses())
-    },[])
 
     const handleFavoriteCourse = (currentCourse:coursesType)=>{
 

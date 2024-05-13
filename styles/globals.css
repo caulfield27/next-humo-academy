@@ -31,3 +31,8 @@ body{
     
     
 }
+
+.open_modal{
+    height: 100vh;
+    overflow-y: hidden;
+}

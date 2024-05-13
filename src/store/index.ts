@@ -5,7 +5,6 @@ import quizModalSlice from "./features/quizes/quizUtils/quizModal";
 import reactQuizSlice from "./features/quizes/reactQuiz";
 import htmlQuizSlice from "./features/quizes/htmlQuiz";
 import pyQuizSlice from "./features/quizes/pyQuiz";
-import getCoursesSlice from "./features/courses/Getcourses";
 import coursesSlice from "./features/courses/courses";
 import authSlice from "./features/auth/auth";
 
@@ -17,7 +16,6 @@ const store = configureStore({
         reactQuiz: reactQuizSlice.reducer,
         htmlQuiz: htmlQuizSlice.reducer,
         pyQuiz: pyQuizSlice.reducer,
-        getCourses: getCoursesSlice.reducer,
         courses: coursesSlice.reducer,
         auth: authSlice.reducer,
     }
