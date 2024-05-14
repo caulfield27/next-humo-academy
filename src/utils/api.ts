@@ -1,11 +1,11 @@
-import axios from "axios";
+
 import { books } from "../store/features/books/booksInterfaces";
-import { instanse } from "../service";
 
 export const getApi = async (path:string)=>{
     try{
-        const response = await instanse.get(path);
-        return response.data
+        const response = await fetch(path);
+        const data = await response.json()
+        return data
     }catch(e){
         console.log(e);
     }finally{
@@ -13,12 +13,18 @@ export const getApi = async (path:string)=>{
     }
 }
 
+export async function getUsers(api: string){
+    const response = await fetch(api)
+    const data = await response.json()
+    return data
+}
 
 
 export const getCourses = async (path:string)=>{
     try{
-        const response = await axios.get(path);
-        return response.data
+        const response = await fetch(path);
+        const data = await response.json()
+        return data
     }catch(e){
         console.log(e)
     }finally{
@@ -29,8 +35,10 @@ export const getCourses = async (path:string)=>{
 
 export async function postData(path:string, arg:books){
     try{
-        const response = await instanse.post(path, arg)
-        return response.data
+        const response = await fetch(path, {
+            method: 'POST',
+            body: JSON.stringify(arg)
+        })
     }catch(e){
         console.log(e)
     }finally{

@@ -5,10 +5,10 @@ import useSWR from 'swr';
 import { CircularProgress } from '@mui/material';
 import {Button} from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { removeFavCourse, setFavCourse, setCourseModal } from '@/src/store/features/courses/courses';
+import { removeFavCourse, setFavCourse, setCourseModal, getUserCourses } from '@/src/store/features/courses/courses';
 import CourseModal from '@/src/components/enterCourseModal/enterCourse';
 import Swal from 'sweetalert2'
-import { coursesType } from '@/src/store/features/courses/coursesType';
+import { IFavCourse, coursesType } from '@/src/store/features/courses/coursesType';
 import { getCourses } from '@/src/utils/api';
 import { useState } from 'react';
 
@@ -20,6 +20,7 @@ const CoursesCard = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const isAuth = useSelectorHook((state)=> state.auth.isAuth)
     const {data,isLoading } = useSWR<coursesType[]>('http://localhost:3002/courses', getCourses)
+    const currentUser = useSelectorHook((state)=> state.auth.currentUser)
     const courses = data
     const filteredCourses = courses === undefined ? [] : courses.filter((course) => {
         const matchesSearch = course.name.toLowerCase().includes(search.toLowerCase());
@@ -28,23 +29,30 @@ const CoursesCard = () => {
     });
 
     const handleFavoriteCourse = (currentCourse:coursesType)=>{
+        const getFavStorage = localStorage.getItem('favCourses')
+    
+        if (isAuth) {
+            if (favCourses.some(favCourse => favCourse.favCourse.id === currentCourse.id)) {
+                const filtered = favCourses.filter((course) => course.favCourse.id !== currentCourse.id)
+                dispatch(getUserCourses(filtered))
+                if(getFavStorage){
+                    const removeCourse = JSON.parse(getFavStorage).filter((curCourse:IFavCourse)  => curCourse.favCourse.id !== currentCourse.id)
+                    dispatch(removeFavCourse(removeCourse))
+                }
+                
 
-        if(isAuth){
-            if(favCourses.some(course=> course.id === currentCourse.id)){
-                dispatch(removeFavCourse(currentCourse))
-                Swal.fire({
-                    title:'Card was deleted',
-                    icon: 'success'
-                })
-            }else{
-                dispatch(setFavCourse(currentCourse))
-                Swal.fire({
-                    title:'Added to favorites',
-                    icon: 'success'
-                })
+            } else {
+                if (getFavStorage) {
+                    const getBooksFromStorage = JSON.parse(getFavStorage)
+                    const favCourse = { userToken: currentUser[0].userToken, favCourse : currentCourse }
+                    getBooksFromStorage.push(favCourse)
+                    dispatch(setFavCourse(getBooksFromStorage))
+                    const newFavList = [...favCourses, favCourse]
+                    dispatch(getUserCourses(newFavList))
+                }
+
             }
-            
-        }else{
+        } else {
             Swal.fire({
                 text:'Log in or sign up to adding favovrite courses',
                 icon:'info',
@@ -52,9 +60,28 @@ const CoursesCard = () => {
                 showConfirmButton: false
                 
             })
+        }
+
+        // if(isAuth){
+        //     if(favCourses.some(course=> course.id === currentCourse.id)){
+        //         dispatch(removeFavCourse(currentCourse))
+        //         Swal.fire({
+        //             title:'Card was deleted',
+        //             icon: 'success'
+        //         })
+        //     }else{
+        //         dispatch(setFavCourse(currentCourse))
+        //         Swal.fire({
+        //             title:'Added to favorites',
+        //             icon: 'success'
+        //         })
+        //     }
+            
+        // }else{
+           
 
             
-        }
+        // }
         
        
     }
@@ -92,7 +119,7 @@ const CoursesCard = () => {
                             filteredCourses.map((course, id) =>
                                 <div key={id + 1} className={styles.card}>
                                     <span className={styles.favoriteCardText}>Add to favorites</span>
-                                    <FavoriteIcon onClick={() => handleFavoriteCourse(course)} className={favCourses.some(favcourse => favcourse.id === course.id) ? `${styles.favCard_active} ${styles.cards_favorites}` : styles.cards_favorites} />
+                                    <FavoriteIcon onClick={() => handleFavoriteCourse(course)} className={favCourses.some(favcourse => favcourse.favCourse.id === course.id) ? `${styles.favCard_active} ${styles.cards_favorites}` : styles.cards_favorites} />
                                     <div className={styles.card_left}>
                                         <h2>{course.name}</h2>
                                         <span className={styles.mentor}>{course.mentor}</span>

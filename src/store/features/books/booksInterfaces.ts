@@ -9,9 +9,7 @@ export interface books{
     id: number
 }
 
-export interface init{
-    booksList: books[],
-    loading: boolean,
+export interface IStates{
     booksModal:boolean,
     dropdown: boolean,
     currentBook: books,

@@ -1,17 +1,16 @@
 "use client"
 import styles from './booksModal.module.css'
 import { useEffect, useState } from 'react'
-import { getUserFavorites, setBooksModal, setUserFavBooks } from '@/src/store/features/books/books'
+import { getUserFavorites, setBooksModal, useBooks } from '@/src/store/features/books/books'
 import useDispatchHook from '@/src/hooks/dispatchHook'
 import useSelectorHook from '@/src/hooks/selectorHook'
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { setFavorites, removeFavorite } from '@/src/store/features/books/books'
 import Swal from 'sweetalert2'
 import { IFavBooks } from '@/src/store/features/books/booksInterfaces'
 export const BooksModal = () => {
     const dispatch = useDispatchHook()
-    const { currentBook, booksModal, favorites } = useSelectorHook((state) => state.books)
+    const { currentBook, booksModal, favorites } = useBooks((state)=> state)
     const [rating, setRating] = useState(Number)
     const currentUser = useSelectorHook((state) => state.auth.currentUser)
     const isAuth = useSelectorHook((state) => state.auth.isAuth)
@@ -19,7 +18,8 @@ export const BooksModal = () => {
 
     const handleCloseModal = (e: any) => {
         if (e.target.classList.contains(styles.modal_container)) {
-            dispatch(setBooksModal(false))
+            setBooksModal(false)
+            document.body.classList.remove('open_modal')
         }
 
     }
@@ -33,9 +33,9 @@ export const BooksModal = () => {
         }
     }, [])
 
-    useEffect(() => {
-        setRating(currentBook.rating)
-    }, [currentBook.rating])
+    // useEffect(() => {
+    //     setRating(currentBook.rating)
+    // }, [currentBook.rating])
 
     const handleFavorites = (book: any) => {
         const getFavStorage = localStorage.getItem('favorites')
@@ -43,11 +43,11 @@ export const BooksModal = () => {
         if (isAuth) {
             if (favorites.some(favBook => favBook.currentBook.id === book.id)) {
                 const filtered = favorites.filter((book) => book.currentBook.id !== currentBook.id)
-                dispatch(getUserFavorites(filtered))
+                getUserFavorites(filtered)
                 if(getFavStorage){
                     const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== book.id)
-                    dispatch(removeFavorite(removedBook))
-                    console.log(removedBook)
+                    localStorage.setItem('favorites', JSON.stringify(removedBook))
+                    
                 }
                 
 
@@ -56,9 +56,9 @@ export const BooksModal = () => {
                     const getBooksFromStorage = JSON.parse(getFavStorage)
                     const favBooks = { userToken: currentUser[0].userToken, currentBook: book }
                     getBooksFromStorage.push(favBooks)
-                    dispatch(setFavorites(getBooksFromStorage))
+                    localStorage.setItem('favorites', JSON.stringify(getBooksFromStorage))
                     const newFavList = [...favorites, favBooks]
-                    dispatch(getUserFavorites(newFavList))
+                    getUserFavorites(newFavList)
                 }
 
             }

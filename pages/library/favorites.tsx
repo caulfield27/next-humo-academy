@@ -1,16 +1,18 @@
 "use client"
 
 import styles from './favorites.module.css'
-import { getUserFavorites, removeFavorite } from '@/src/store/features/books/books';
+import { getUserFavorites, useBooks } from '@/src/store/features/books/books';
 import useDispatchHook from '@/src/hooks/dispatchHook';
 import useSelectorHook from '@/src/hooks/selectorHook';
 import { IFavBooks, books } from '@/src/store/features/books/booksInterfaces';
 
 
 const Favorites = () => {
-    const dispatch = useDispatchHook()
-    const favoriteBooks = useSelectorHook((state)=> state.books.favorites)
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    // const dispatch = useDispatchHook()
+    // const favoriteBooks = useSelectorHook((state)=> state.books.favorites)
+    // const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    const favoriteBooks = useBooks((state)=> state.favorites)
+    const dropdown = useBooks((state)=> state.dropdown)
    
     const handleRead = (event: any) =>{
         window.open(event.target.value, '_blank')
@@ -21,9 +23,9 @@ const Favorites = () => {
         const getFavStorage = localStorage.getItem('favorites')
         if(getFavStorage){
             const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== currentBook.id)
-            dispatch(removeFavorite(removedBook))
+            localStorage.setItem('favorites',JSON.stringify(removedBook))
         }
-        dispatch(getUserFavorites(filtered))
+        getUserFavorites(filtered)
     }
 
 

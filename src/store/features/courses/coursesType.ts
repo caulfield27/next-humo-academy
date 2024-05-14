@@ -10,3 +10,8 @@ export interface coursesType{
     category:string,
     id:string,
 }
+
+export interface IFavCourse{
+    favCourse:coursesType,
+    userToken:string
+}

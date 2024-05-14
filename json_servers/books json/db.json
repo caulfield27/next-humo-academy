@@ -1,4 +1,13 @@
 {
+  "users": [{
+    "userEmail": "salikhovalisher@mail.ru",
+    "userFavoriteBooks": [],
+    "userName":"Salikhov Alisher",
+    "userPassword": "12345",
+    "userToken": "token!*salikhovalisher@mail.ru12345"
+  }
+      
+  ],
   "books": [
     {
       "name": "You don`t know JS",
@@ -302,24 +311,24 @@
       "id": "30"
     },
     {
-      "id": 1715602847647,
-      "name": "test",
-      "author": "test",
-      "image": "test",
-      "pdf": "test",
+      "id": 1715673888055,
+      "name": "HTML & CSS: Design and Build Web Sites",
+      "author": "John Dacket",
+      "image": "https://i.ebayimg.com/images/g/PdYAAOSwZAtky52r/s-l400.jpg",
+      "pdf": "https://wtf.tw/ref/duckett.pdf",
       "rating": "4",
-      "released": "test",
-      "description": "test"
+      "released": "2014",
+      "description": "We will spend the first chapter\nlooking at how HTML is used to\ncreate web pages. You will see\nthat you start by writing down\nthe words you want to appear\non your page"
     },
     {
-      "id": 1715602898068,
-      "name": "test1",
-      "author": "test1",
-      "image": "test1",
-      "pdf": "test1",
-      "rating": "3",
-      "released": "test1",
-      "description": "test1"
+      "id": 1715674392205,
+      "name": "Flutter in Action",
+      "author": "Erik Windmill",
+      "image": "https://img.perlego.com/books/RM_Books/kaplan_wcyricq/9781638356431.jpg",
+      "pdf": "https://edu.anarcho-copy.org/Programming%20Languages/Frontend/flutter/Flutter%20in%20Action.pdf",
+      "rating": "3.5",
+      "released": "2019",
+      "description": "Many of the designations used by manufacturers and sellers to distinguish their products are claimed as trademarks. Where those designations appear in the book, and Manning Publications was aware of a trademark claim, the designations have been printed in initial caps or all caps. Recognizing the importance of preserving what has been written, it is Manning’s policy to have the books we publish printed on acid-free paper, and we exert our best efforts to that end. Recognizing also our responsibility to conserve the resources of our planet, Manning books are printed on paper that is at least 15 percent recycled and processed without the use of elemental chlorine."
     }
   ]
 }

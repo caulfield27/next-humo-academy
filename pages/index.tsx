@@ -2,10 +2,19 @@
 import styles from './index.module.css'
 import useSelectorHook from '@/src/hooks/selectorHook'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { setUserFavBooks } from '@/src/store/features/books/books'
+import { setUserFavCourse } from '@/src/store/features/courses/courses'
+import useDispatchHook from '@/src/hooks/dispatchHook'
 
 const Home = ()=>{
     const navigate = useRouter()
     const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    const isAuth = useSelectorHook((state)=> state.auth.isAuth)
+    const dispatch = useDispatchHook()
+
+    
+
     return (
         <>
             <div className={dropdown ? `${styles.home_wrapper} ${styles.dropdown_adaptive}` : styles.home_wrapper}>

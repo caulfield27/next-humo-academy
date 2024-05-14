@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState } from "react";
-import { setCurrentBook, setBooksModal, setUserFavBooks } from "@/src/store/features/books/books";
 import useSWR from "swr";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
@@ -15,38 +14,31 @@ import BooksModal from "@/src/components/booksModal/booksModal";
 import { getApi } from "@/src/utils/api";
 import PostModal, { IModal } from "@/src/components/postModal/postModal";
 import {TextField} from "@mui/material";
+import { setBooksModal, setCurrentBook, useBooks } from "@/src/store/features/books/books";
 
 const Library = () => {
     const dispatch = useDispatchHook()
-    const { favorites, dropdown } = useSelectorHook((state) => state.books);
+    // const { favorites, dropdown } = useSelectorHook((state) => state.books);
+    const favorites = useBooks((state)=> state.favorites)
+    const dropdown = useBooks((state)=> state.dropdown)
     const [searchValue, setSeacrhValue] = useState('')
     const [page, setPage] = useState(1)
     const isAuth = useSelectorHook((state) => state.auth.isAuth)
-    const { data, isLoading} = useSWR(`/books?_page=${page}`, getApi)
     const [postModal, setPostModal] = useState(false)
-    
+    const {data, isLoading} = useSWR(`http://localhost:3001/books?_page=${page}`, getApi)
     const pages = data === undefined ? 1 : Math.ceil(data.items / 10)
-    console.log(pages)
-    
-    
-    useEffect(() => {
-        if (isAuth) {
-            const getStorage = localStorage.getItem('favorites')
-            if (getStorage) {
-                const parsedBooks = JSON.parse(getStorage)
-                dispatch(setUserFavBooks(parsedBooks))
-            }
-        }
-
-    }, [dispatch, isAuth])
+   
 
     function handleRead(e: any) {
         window.open(e.target.value, '_blank')
     }
 
     function handleModal(books: books) {
-        dispatch(setBooksModal(true))
-        dispatch(setCurrentBook(books))
+        // dispatch(setBooksModal(true))
+        // dispatch(setCurrentBook(books))
+        setBooksModal(true)
+        setCurrentBook(books)
+        document.body.classList.add('open_modal')
 
     }
 
@@ -64,7 +56,6 @@ const Library = () => {
         setPage(value);
     };
 
-    console.log(isLoading)
 
     return (
         <>

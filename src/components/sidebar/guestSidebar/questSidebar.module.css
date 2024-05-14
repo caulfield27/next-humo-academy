@@ -78,10 +78,10 @@
     left: 25px;
     top: -5px;
     text-align: center;
+    display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-family: 'roboto';
     width: 25px;
     height: 25px;
     background: red;

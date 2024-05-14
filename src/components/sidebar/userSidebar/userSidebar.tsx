@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { Settings } from '@mui/icons-material';
 import Link from 'next/link';
+import { resetCourses } from '@/src/store/features/courses/courses';
 
 
 const LogedSidebar = () => {
@@ -45,6 +46,8 @@ const LogedSidebar = () => {
         setAnchorEl(null)
         dispatch(logOut())
         dispatch(resetFavorites())
+        dispatch(resetCourses())
+        navigate.push('/')
         Swal.fire({
             text: 'you loged out from your account',
             icon: 'info'
