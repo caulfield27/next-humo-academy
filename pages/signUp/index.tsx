@@ -1,6 +1,6 @@
 import styles from '../../styles/auth.module.css'
 import { useState } from 'react';
-import useAuth, { handleSignup } from '@/src/store/features/auth/auth';
+import  { handleSignup } from '@/src/store/features/auth/auth';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +16,6 @@ const SignUp = ()=>{
     const [password, setPassword] = useState('');
     const [fullName, setFullName] = useState('')
     const {data} = useSWR('http://localhost:3001/users', getUsers)
-    const {setAuth, setCurrentUser} = useAuth()
     const navigate = useRouter()
     const [validation, setValidation] = useState({
     email: false,

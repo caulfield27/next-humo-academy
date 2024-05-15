@@ -14,13 +14,15 @@ const Login = ()=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useRouter()
-    const {setAuth, setCurrentUser} = useAuth()
+    const setAuth = useAuth((state)=> state.setAuth)
+    const setCurrentUser = useAuth((state)=> state.setCurrentUser)
     const {data} = useSWR('http://localhost:3001/users', getUsers)
     const [validation, setValidation] = useState({
     email: false,
     password: false
   });
     const dropdown = useBooks((state)=> state.dropdown)
+    
     const handleLoginSubmit = (e:any)=>{
         e.preventDefault()
         handleLogin(email, password, navigate, data, setAuth, setCurrentUser)

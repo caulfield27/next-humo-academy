@@ -1,6 +1,6 @@
 "use client"
 
-import { FunctionComponent,  useState } from 'react'
+import { useState } from 'react'
 import styles from './postModal.module.css'
 import { TextField } from '@mui/material'
 import {Button} from '@mui/material'
@@ -9,7 +9,6 @@ import Swal from 'sweetalert2'
 import { postData } from '@/src/utils/api'
 import { isLInk } from '@/src/utils/checkLinkValidate'
 import { useSWRConfig } from 'swr'
-import { Span } from 'next/dist/trace'
 
 export interface IModal{
     setModal:Function,

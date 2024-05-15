@@ -14,12 +14,15 @@ import { useCourseStore } from '@/src/store/features/courses/courses';
 
 const CoursesCard = () => {
     const dropdown = useBooks((state)=> state.dropdown)
-    const {favoriteCourses,setCourseModal, getUserCourses} = useCourseStore((state)=> state)
+    const favoriteCourses = useCourseStore((state)=> state.favoriteCourses)
+    const setCourseModal = useCourseStore((state)=> state.setCourseModal)
+    const getUserCourses = useCourseStore((state)=> state.getUserCourses)
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
-    const {isAuth, currentUser} = useAuth((state)=> state)
+    const isAuth = useAuth((state)=> state.isAuth)
+    const currentUser = useAuth((state)=> state.currentUser)
     const {data,isLoading } = useSWR<coursesType[]>('http://localhost:3002/courses', getCourses)
-    const courses = data
+    const courses = data 
     const filteredCourses = courses === undefined ? [] : courses.filter((course) => {
         const matchesSearch = course.name.toLowerCase().includes(search.toLowerCase());
         const matchesCategory = !selectedCategory || course.category === selectedCategory;

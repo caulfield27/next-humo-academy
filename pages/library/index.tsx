@@ -15,7 +15,10 @@ import {TextField} from "@mui/material";
 import {useBooks } from "@/src/store/features/books/books";
 
 const Library = () => {
-    const {favorites, dropdown, setBooksModal, setCurrentBook} = useBooks((state)=> state)
+    const favorites = useBooks((state)=> state.favorites)
+    const dropdown = useBooks((state)=> state.dropdown)
+    const setBooksModal = useBooks((state)=> state.setBooksModal)
+    const setCurrentBook = useBooks((state)=> state.setCurrentBook)
     const [searchValue, setSeacrhValue] = useState('')
     const [page, setPage] = useState(1)
     const [postModal, setPostModal] = useState(false)
@@ -28,8 +31,7 @@ const Library = () => {
     }
 
     function handleModal(books: books) {
-        // dispatch(setBooksModal(true))
-        // dispatch(setCurrentBook(books))
+
         setBooksModal(true)
         setCurrentBook(books)
         document.body.classList.add('open_modal')
@@ -61,7 +63,6 @@ const Library = () => {
 
                 </div>
                 <div className={styles.library_navigation}>
-                    {/* <input placeholder="search..." onChange={(e) => setSeacrhValue(e.target.value)} className={styles.searchInput} /> */}
                     <TextField id="outlined-basic" label="Search book..." variant="outlined"  color="success"
                     onChange={(e) => setSeacrhValue(e.target.value)}/>
                     <Button

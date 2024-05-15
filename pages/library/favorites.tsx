@@ -6,7 +6,8 @@ import { IFavBooks, books } from '@/src/store/features/books/booksInterfaces';
 
 
 const Favorites = () => {
-    const {favorites, getUserFavorites} = useBooks((state)=> state)
+    const favorites = useBooks((state)=> state.favorites)
+    const getUserFavorites = useBooks((state)=> state.getUserFavorites)
     const dropdown = useBooks((state)=> state.dropdown)
    
     const handleRead = (event: any) =>{

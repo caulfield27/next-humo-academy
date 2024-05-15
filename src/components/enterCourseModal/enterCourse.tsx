@@ -3,13 +3,20 @@ import { Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { useCourseStore } from '@/src/store/features/courses/courses'
+import { getFromStorage } from '@/src/utils/getFromStorage'
 
+interface IStudents{
+    name: string,
+    email:string,
+    phone: string
+}
 
 const CourseModal = ()=>{
     const {courseModal, setCourseModal} = useCourseStore()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+
 
     const handleSubmit = (event: any) => {
 
@@ -20,11 +27,12 @@ const CourseModal = ()=>{
             email: email.trim(),
             phone: phone.trim()
         };
-        const getStudentsStorage = typeof window !== 'undefined' ?
-        localStorage.getItem('students') : null  
-        const students = getStudentsStorage ? JSON.parse(getStudentsStorage) : []
+ 
+        
+        const getStudentsStorage = localStorage.getItem('students') 
+        const students:IStudents[] = getStudentsStorage ? JSON.parse(getStudentsStorage) : []
         const alredySigned = students.some(
-            (student:any) =>
+            (student) =>
                 student.name.toLowerCase() === newStudent.name.toLowerCase() &&
                 student.email.toLowerCase() === newStudent.email.toLowerCase() &&
                 student.phone.toLowerCase() === newStudent.phone.toLowerCase()

@@ -12,13 +12,14 @@ import { useQuizes } from '@/src/store/features/quizes/quizes';
 const Quizes = () => {
     const navigate = useRouter()
     const dropdown = useBooks((state)=> state.dropdown)
-    const {setQuestions, resetQuiz} = useQuizes((state)=> state)
+    const setQuestions = useQuizes((state)=> state.setQuestions)
+    const resetQuiz = useQuizes((state)=> state.resetQuiz)
     
 
     
     const OpenQuiz = (quiz:IGlobalQuestions) =>{
         navigate.push('/quizes/quiz')
-        setQuestions(quiz.questions, quiz.id-1)
+        setQuestions(quiz)
         localStorage.setItem('questions', JSON.stringify(quiz))
         resetQuiz()
     }

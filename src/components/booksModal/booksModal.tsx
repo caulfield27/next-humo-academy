@@ -9,9 +9,13 @@ import { IFavBooks } from '@/src/store/features/books/booksInterfaces'
 import useAuth from '@/src/store/features/auth/auth'
 
 export const BooksModal = () => {
-    const { currentBook, booksModal, favorites, setBooksModal, getUserFavorites } = useBooks((state)=> state)
-    const [rating, setRating] = useState(Number)
+    const currentBook = useBooks((state)=> state.currentBook)
+    const booksModal = useBooks((state)=> state.booksModal)
+    const favorites = useBooks((state)=> state.favorites)
+    const setBooksModal = useBooks((state)=> state.setBooksModal)
+    const getUserFavorites = useBooks((state)=> state.getUserFavorites)
     const {isAuth, currentUser} = useAuth((state) => state)
+    
 
 
     const handleCloseModal = (e: any) => {
@@ -30,10 +34,6 @@ export const BooksModal = () => {
             document.removeEventListener('click', handleCloseModal)
         }
     }, [])
-
-    // useEffect(() => {
-    //     setRating(currentBook.rating)
-    // }, [currentBook.rating])
 
     const handleFavorites = (book: any) => {
         const getFavStorage = localStorage.getItem('favorites')
@@ -83,7 +83,7 @@ export const BooksModal = () => {
                     <div className={styles.right_wrap}>
                         <div className={styles.rating_button}>
                             <div className={styles.rating}>
-                                <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
+                                <Rating name="half-rating-read" value={currentBook.rating} precision={0.5} readOnly />
                                 <span>{currentBook.rating}</span>
                             </div>
                             <div className={styles.modal_button}>

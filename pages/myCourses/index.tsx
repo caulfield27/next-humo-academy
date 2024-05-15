@@ -6,7 +6,10 @@ import React from 'react'
 import { useCourseStore } from '@/src/store/features/courses/courses'
 
 const MyCourses = ()=>{
-    const {favoriteCourses, getUserCourses, setCourseModal} = useCourseStore((state)=> state)
+    const favoriteCourses = useCourseStore((state)=> state.favoriteCourses)
+    const getUserCourses = useCourseStore((state)=> state.getUserCourses)
+    const setCourseModal = useCourseStore((state)=> state.setCourseModal)
+    
     
     const handelRemove = (currentCourse: coursesType)=>{
         const filtered = favoriteCourses.filter((course) => course.favCourse.id !== currentCourse.id)
