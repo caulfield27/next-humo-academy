@@ -1,47 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IFavCourse, coursesType } from "./coursesType";
+import { IUserItem } from "../auth/auth";
+import { IFavCourse } from "./coursesType";
+import { create } from "zustand";
 
-
-interface courses{
+interface ICourses{
     favoriteCourses:IFavCourse[],
     courseModal: boolean,
 }
 
-const initialState:courses = {
+interface Actions{
+    setCourseModal: (payload: boolean) => void,
+    getUserCourses: (payload: IFavCourse[] ) => void,
+    resetCourses: ()=> void
+
+}
+
+export const useCourseStore = create<ICourses & Actions>((set)=>({
     favoriteCourses: [],
-    courseModal: false
-}
+    courseModal: false,
+    setCourseModal: (payload)=> set(()=> ({courseModal: payload})),
+    getUserCourses: (payload)=> set(()=> ({favoriteCourses: payload})),
+    resetCourses: ()=> set(()=> ({favoriteCourses: []}))
 
-const coursesSlice = createSlice({
-    name: 'courses',
-    initialState,
-    reducers:{
-        setFavCourse: (state, {payload})=>{
-            localStorage.setItem('favCourses', JSON.stringify(payload))
-        },
-        removeFavCourse: (state, {payload})=>{
-            localStorage.setItem('favCourses', JSON.stringify(payload))
-        },
-        setCourseModal:(state, {payload})=>{
-            state.courseModal = payload
-        },
-        getUserCourses: (state, {payload})=>{
-            state.favoriteCourses = payload
-        },
-        resetCourses: (state)=>{
-            state.favoriteCourses = []
-        }
-    }
-})
+}))
 
-
-export const setUserFavCourse = (favCourses:IFavCourse[]) => (dispatch:Function, getState:Function) => {
-    const {auth} = getState()
-    const currentUser = auth.currentUser
+export const setUserFavCourse = (favCourses:IFavCourse[], currentUser:IUserItem[], getUserCourses:Function)=>{
     const  customFav = favCourses.filter(course => course.userToken === currentUser[0].userToken)
-    dispatch(getUserCourses(customFav))
+    getUserCourses(customFav)
 }
 
-export const {setFavCourse, removeFavCourse, setCourseModal, getUserCourses, resetCourses} = coursesSlice.actions
 
-export default coursesSlice

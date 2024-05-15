@@ -1,17 +1,26 @@
 import styles from './index.module.css'
-import { quizInterfaces, quizes } from '../../src/utils/quizInfo';
-import useSelectorHook from '@/src/hooks/selectorHook';
 import { useRouter } from 'next/navigation';
 import { Rating } from '@mui/material';
+import { useBooks } from '@/src/store/features/books/books';
+import { quizes } from '@/src/store/features/quizes/quizUtils/questions';
+import { IGlobalQuestions } from '@/src/store/features/quizes/quizUtils/quizTypes';
+import { useQuizes } from '@/src/store/features/quizes/quizes';
+
 
 
 
 const Quizes = () => {
     const navigate = useRouter()
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    const dropdown = useBooks((state)=> state.dropdown)
+    const {setQuestions, resetQuiz} = useQuizes((state)=> state)
     
-    const OpenQuiz = (quiz:quizInterfaces) =>{
-        navigate.push(quiz.path)
+
+    
+    const OpenQuiz = (quiz:IGlobalQuestions) =>{
+        navigate.push('/quizes/quiz')
+        setQuestions(quiz.questions, quiz.id-1)
+        localStorage.setItem('questions', JSON.stringify(quiz))
+        resetQuiz()
     }
 
     return (

@@ -1,25 +1,21 @@
 import { Button } from '@mui/material'
 import styles from './index.module.css'
-import useSelectorHook from '@/src/hooks/selectorHook'
-import useDispatchHook from '@/src/hooks/dispatchHook'
-import { getUserCourses, removeFavCourse, setFavCourse } from '@/src/store/features/courses/courses'
 import CourseModal from '@/src/components/enterCourseModal/enterCourse'
 import { IFavCourse, coursesType } from '@/src/store/features/courses/coursesType'
-import { setCourseModal } from '@/src/store/features/courses/courses'
 import React from 'react'
+import { useCourseStore } from '@/src/store/features/courses/courses'
 
 const MyCourses = ()=>{
-    const dispatch = useDispatchHook()
-    const favCourses = useSelectorHook((state)=> state.courses.favoriteCourses)
+    const {favoriteCourses, getUserCourses, setCourseModal} = useCourseStore((state)=> state)
     
     const handelRemove = (currentCourse: coursesType)=>{
-        const filtered = favCourses.filter((course) => course.favCourse.id !== currentCourse.id)
+        const filtered = favoriteCourses.filter((course) => course.favCourse.id !== currentCourse.id)
         const getFavStorage = localStorage.getItem('favCourses')
         if(getFavStorage){
             const removeCourse = JSON.parse(getFavStorage).filter((removeCourse: IFavCourse)  => removeCourse.favCourse.id !== currentCourse.id)
-            dispatch(removeFavCourse(removeCourse))
+            localStorage.setItem('favCourses', JSON.stringify(removeCourse))
         }
-        dispatch(getUserCourses(filtered))
+        getUserCourses(filtered)
     }
 
     return (
@@ -27,17 +23,17 @@ const MyCourses = ()=>{
             <CourseModal/>
             <div className={styles.myCourses_wrapper}>
                 <h1>My courses</h1>
-                <span className={styles.courses_amount}>{favCourses.length} in cart</span>
+                <span className={styles.courses_amount}>{favoriteCourses.length} in cart</span>
                 <div className={styles.favCourses_container}>
                     
-                    {favCourses.length < 1 ?
+                    {favoriteCourses.length < 1 ?
                     <div className={styles.empty_wrapper}>
                         <img src='empty.jpg' alt="empty cart" />
                         <span><center>Your cart is empty.</center><br/>Go to humo courses and choose your favorite</span>
                     </div>
                     :
                     
-                    favCourses.map((course, id) => {
+                    favoriteCourses.map((course, id) => {
                         return <div key={id + 1} className={styles.card}>
                             <div className={styles.card_left}>
                                 <h2>{course.favCourse.name}</h2>
@@ -58,7 +54,7 @@ const MyCourses = ()=>{
                                 <img src={course.favCourse.image} alt="" />
                                 <div className={styles.card_buttons}>
                                     <Button variant='outlined' color='secondary'
-                                    onClick={()=> dispatch(setCourseModal(true))}
+                                    onClick={()=> setCourseModal(true)}
                                     >sign up</Button>
                                     <Button variant='outlined' color='error' onClick={()=>handelRemove(course.favCourse)}>remove</Button>
                                 </div>

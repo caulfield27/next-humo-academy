@@ -1,11 +1,12 @@
 import styles from './index.module.css'
 import useSelectorHook from '@/src/hooks/selectorHook'
+import { useBooks } from '@/src/store/features/books/books'
 import { mentors } from '@/src/utils/mentorsInfo'
 
 
 const Mentors = ()=>{
 
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    const dropdown = useBooks((state)=> state.dropdown)
 
 
     return (

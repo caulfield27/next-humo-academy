@@ -1,19 +1,17 @@
 "use client"
 import styles from './booksModal.module.css'
 import { useEffect, useState } from 'react'
-import { getUserFavorites, setBooksModal, useBooks } from '@/src/store/features/books/books'
-import useDispatchHook from '@/src/hooks/dispatchHook'
-import useSelectorHook from '@/src/hooks/selectorHook'
+import { useBooks } from '@/src/store/features/books/books'
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Swal from 'sweetalert2'
 import { IFavBooks } from '@/src/store/features/books/booksInterfaces'
+import useAuth from '@/src/store/features/auth/auth'
+
 export const BooksModal = () => {
-    const dispatch = useDispatchHook()
-    const { currentBook, booksModal, favorites } = useBooks((state)=> state)
+    const { currentBook, booksModal, favorites, setBooksModal, getUserFavorites } = useBooks((state)=> state)
     const [rating, setRating] = useState(Number)
-    const currentUser = useSelectorHook((state) => state.auth.currentUser)
-    const isAuth = useSelectorHook((state) => state.auth.isAuth)
+    const {isAuth, currentUser} = useAuth((state) => state)
 
 
     const handleCloseModal = (e: any) => {

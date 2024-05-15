@@ -1,17 +1,12 @@
 "use client"
 
 import styles from './favorites.module.css'
-import { getUserFavorites, useBooks } from '@/src/store/features/books/books';
-import useDispatchHook from '@/src/hooks/dispatchHook';
-import useSelectorHook from '@/src/hooks/selectorHook';
+import {  useBooks } from '@/src/store/features/books/books';
 import { IFavBooks, books } from '@/src/store/features/books/booksInterfaces';
 
 
 const Favorites = () => {
-    // const dispatch = useDispatchHook()
-    // const favoriteBooks = useSelectorHook((state)=> state.books.favorites)
-    // const dropdown = useSelectorHook((state)=> state.books.dropdown)
-    const favoriteBooks = useBooks((state)=> state.favorites)
+    const {favorites, getUserFavorites} = useBooks((state)=> state)
     const dropdown = useBooks((state)=> state.dropdown)
    
     const handleRead = (event: any) =>{
@@ -19,7 +14,7 @@ const Favorites = () => {
     }
 
     const handleDelete = (currentBook:books)=>{
-        const filtered = favoriteBooks.filter((book) => book.currentBook.id !== currentBook.id)
+        const filtered = favorites.filter((book) => book.currentBook.id !== currentBook.id)
         const getFavStorage = localStorage.getItem('favorites')
         if(getFavStorage){
             const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== currentBook.id)
@@ -37,14 +32,14 @@ const Favorites = () => {
                 <div className={dropdown ? `${styles.dropdown_adaptive} ${styles.favorites_wrapper}` : styles.favorites_wrapper}>
                     <h1>Your favorite books</h1>
                     <hr />
-                    {favoriteBooks.length == 0 ?
+                    {favorites.length == 0 ?
                         <div className={styles.noFavorites_wrap}>
                             <h1>You don`t have favorite books yet</h1>
                             <img src='/favorites.png' alt="favorites" />
                         </div> :
 
                         <div className={styles.favorites_container}>
-                            {favoriteBooks.map((book, ind) => {
+                            {favorites.map((book, ind) => {
                                 return <div key={ind + 1} className={styles.favorite_card}>
                                     <img src={book.currentBook.image} alt={book.currentBook.name} />
                                     <div className={styles.favoriteCard_content}>

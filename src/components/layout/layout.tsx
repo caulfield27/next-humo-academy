@@ -1,30 +1,21 @@
-import useSelectorHook from "@/src/hooks/selectorHook";
+
 import Sidebar from "../sidebar/sidebar";
 import React, { useEffect } from "react";
-import useDispatchHook from "@/src/hooks/dispatchHook";
+import { setUserFavCourse, useCourseStore } from "@/src/store/features/courses/courses";
 import { setUserFavBooks } from "@/src/store/features/books/books";
-import { setUserFavCourse } from "@/src/store/features/courses/courses";
+import useAuth from "@/src/store/features/auth/auth";
+import { useBooks } from "@/src/store/features/books/books";
 
 
 const Layouts = ({children}:{children:React.ReactNode}) => {
-    const isAuth = useSelectorHook((state)=> state.auth.isAuth)
-    const dispatch = useDispatchHook()
-    useEffect(()=>{
-        const getBooks = localStorage.getItem('favorites')
-        const getCourse = localStorage.getItem('favCourses')
-        if(getBooks){
-            localStorage.setItem('favorites',getBooks)
-        }else{
-            localStorage.setItem('favorites', JSON.stringify([])) 
-        }
-        if(getCourse){
-            localStorage.setItem('favCourses',getCourse)
-        }else{
-            localStorage.setItem('favCourses', JSON.stringify([])) 
-        }
+    const isAuth = useAuth((state)=> state.isAuth)
+    const {getUserFavorites} = useBooks()
+    const {getUserCourses} = useCourseStore()
+    const currentUser = useAuth((state)=> state.currentUser)
 
-        
-    })
+
+
+
 
     useEffect(() => {
         if (isAuth) {
@@ -32,15 +23,15 @@ const Layouts = ({children}:{children:React.ReactNode}) => {
             const getStorageCourses = localStorage.getItem('favCourses')
             if (getStorageBooks) {
                 const parsedBooks = JSON.parse(getStorageBooks)
-                dispatch(setUserFavBooks(parsedBooks))
+                setUserFavBooks(parsedBooks,getUserFavorites, currentUser)
             }
             if(getStorageCourses){
                 const parsedCourses = JSON.parse(getStorageCourses)
-                dispatch(setUserFavCourse(parsedCourses))
+                setUserFavCourse(parsedCourses,currentUser, getUserCourses, )
             }
         }
 
-    }, [dispatch, isAuth])
+    }, [isAuth])
     
 
     return (

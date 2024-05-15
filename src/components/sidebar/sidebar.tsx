@@ -2,18 +2,22 @@
 import QuestSidebar from "./guestSidebar/questSidebar";
 import LogedSidebar from "./userSidebar/userSidebar";
 import { useEffect, useState } from "react";
-import { checkIsAuth } from "@/src/store/features/auth/auth";
-import useDispatchHook from "@/src/hooks/dispatchHook";
 import { useSelector } from "react-redux";
-import useSelectorHook from "@/src/hooks/selectorHook";
+import useAuth from "@/src/store/features/auth/auth";
 
 
 const Sidebar = () => {
-    const dispatch = useDispatchHook()
-    const isAuth = useSelectorHook((state)=> state.auth.isAuth)
+    const {isAuth, checkIsAuth, setCurrentUser} = useAuth((state)=> state)
 
     useEffect(()=>{
-        dispatch(checkIsAuth(Boolean(localStorage.getItem('loggedInUser'))))
+        const logedUSer = localStorage.getItem('loggedInUser')
+        if(logedUSer){
+            checkIsAuth(Boolean(logedUSer))
+            setCurrentUser(JSON.parse(logedUSer))
+        }
+        
+        
+        
     },[isAuth])
 
 

@@ -1,15 +1,12 @@
 import styles from '../enterCourseModal/enterCourse.module.css'
-import { setCourseModal } from '@/src/store/features/courses/courses'
-import useSelectorHook from '@/src/hooks/selectorHook'
-import useDispatchHook from '@/src/hooks/dispatchHook'
 import { Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import { useCourseStore } from '@/src/store/features/courses/courses'
 
 
 const CourseModal = ()=>{
-    const dispatch = useDispatchHook()
-    const modal = useSelectorHook((state)=> state.courses.courseModal)
+    const {courseModal, setCourseModal} = useCourseStore()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -54,7 +51,7 @@ const CourseModal = ()=>{
         setName('');
         setEmail('');
         setPhone('');
-        dispatch(setCourseModal(false));
+        setCourseModal(false);
 
     }
 
@@ -63,7 +60,7 @@ const CourseModal = ()=>{
 
     const handleCloseModal = (e:any)=>{
         if(e.target.classList.contains(styles.coursesModal_container)){
-            dispatch(setCourseModal(false))
+            setCourseModal(false)
         }
 
     }
@@ -78,7 +75,7 @@ const CourseModal = ()=>{
     const isDataComplete = name.trim() !== '' && email.trim() !== '' && phone.trim() !== ''; 
 
     return (
-        <div className={modal ? `${styles.coursesModal_container} ${styles.display_block}` : styles.display_none}>
+        <div className={courseModal ? `${styles.coursesModal_container} ${styles.display_block}` : styles.display_none}>
             <div className={styles.courses_modal}>
                 <div className={styles.modal_header}>
                     <center><h1>Sign up<br/>for Humo academy courses</h1></center>

@@ -1,13 +1,12 @@
 import { Rating } from "@mui/material"
 import styles from './quizInfo.module.css'
-import { quizes } from "@/src/utils/quizInfo"
-import { FunctionComponent } from "react"
+import { quizes } from "@/src/store/features/quizes/quizUtils/questions"
+import { useQuizes } from "@/src/store/features/quizes/quizes"
 
-interface Props{
-    infoIndex: number
-}
 
-const QuizInfo:FunctionComponent<Props> = ({infoIndex})=>{
+
+const QuizInfo= ()=>{
+    const infoIndex = useQuizes((state)=> state.currentQuiz)
     return (
         <div className={styles.quiz_container_header}>
             <img src={quizes[infoIndex].img} alt="js" />

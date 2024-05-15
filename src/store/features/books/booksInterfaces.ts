@@ -16,6 +16,6 @@ export interface IStates{
     favorites: IFavBooks[]
 }
 export interface IFavBooks{
-    userToken:string,
+    userToken:string | null,
     currentBook:books
 }

@@ -1,21 +1,14 @@
 import styles from './resultModal.module.css'
-import useDispatchHook from '@/src/hooks/dispatchHook'
-import useSelectorHook from '@/src/hooks/selectorHook'
 import { quizTypes } from '@/src/store/features/quizes/quizUtils/quizTypes'
-import { FunctionComponent } from 'react'
-import { setQuizModal } from '@/src/store/features/quizes/quizUtils/quizModal'
+import { useQuizes } from '@/src/store/features/quizes/quizes'
 
-interface Props{
-    questions:quizTypes[]
-}
-
-const ResultModal:FunctionComponent<Props> = ({questions})=>{
-    const modal = useSelectorHook((state)=> state.quizModal.modal)
-    const dispatch = useDispatchHook()
+const ResultModal = ()=>{
+    const {questions, setQuizModal, quizModal} = useQuizes()
+    
 
    
     const handleAnswersModal = () =>{
-        dispatch(setQuizModal(false))
+        setQuizModal(false)
     }
 
    
@@ -23,7 +16,7 @@ const ResultModal:FunctionComponent<Props> = ({questions})=>{
 
     return (
        
-        <div className={modal ? styles.modal_wrapper : styles.modal_close}>
+        <div className={quizModal ? styles.modal_wrapper : styles.modal_close}>
             <div className={styles.modal}>
                 <div className={styles.modal_content}>
                     <div className={styles.modal_header}>

@@ -1,26 +1,24 @@
 import styles from './index.module.css'
-import useSelectorHook from "@/src/hooks/selectorHook";
-import useDispatchHook from "@/src/hooks/dispatchHook";
 import useSWR from 'swr';
 import { CircularProgress } from '@mui/material';
 import {Button} from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { removeFavCourse, setFavCourse, setCourseModal, getUserCourses } from '@/src/store/features/courses/courses';
 import CourseModal from '@/src/components/enterCourseModal/enterCourse';
 import Swal from 'sweetalert2'
 import { IFavCourse, coursesType } from '@/src/store/features/courses/coursesType';
 import { getCourses } from '@/src/utils/api';
 import { useState } from 'react';
+import { useBooks } from '@/src/store/features/books/books';
+import useAuth from '@/src/store/features/auth/auth';
+import { useCourseStore } from '@/src/store/features/courses/courses';
 
 const CoursesCard = () => {
-    const dispatch = useDispatchHook()
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
-    const favCourses = useSelectorHook((state)=> state.courses.favoriteCourses)
+    const dropdown = useBooks((state)=> state.dropdown)
+    const {favoriteCourses,setCourseModal, getUserCourses} = useCourseStore((state)=> state)
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
-    const isAuth = useSelectorHook((state)=> state.auth.isAuth)
+    const {isAuth, currentUser} = useAuth((state)=> state)
     const {data,isLoading } = useSWR<coursesType[]>('http://localhost:3002/courses', getCourses)
-    const currentUser = useSelectorHook((state)=> state.auth.currentUser)
     const courses = data
     const filteredCourses = courses === undefined ? [] : courses.filter((course) => {
         const matchesSearch = course.name.toLowerCase().includes(search.toLowerCase());
@@ -32,12 +30,12 @@ const CoursesCard = () => {
         const getFavStorage = localStorage.getItem('favCourses')
     
         if (isAuth) {
-            if (favCourses.some(favCourse => favCourse.favCourse.id === currentCourse.id)) {
-                const filtered = favCourses.filter((course) => course.favCourse.id !== currentCourse.id)
-                dispatch(getUserCourses(filtered))
+            if (favoriteCourses.some(favCourse => favCourse.favCourse.id === currentCourse.id)) {
+                const filtered = favoriteCourses.filter((course) => course.favCourse.id !== currentCourse.id)
+                getUserCourses(filtered)
                 if(getFavStorage){
                     const removeCourse = JSON.parse(getFavStorage).filter((curCourse:IFavCourse)  => curCourse.favCourse.id !== currentCourse.id)
-                    dispatch(removeFavCourse(removeCourse))
+                    localStorage.setItem('favCourses', JSON.stringify(removeCourse))
                 }
                 
 
@@ -46,10 +44,14 @@ const CoursesCard = () => {
                     const getBooksFromStorage = JSON.parse(getFavStorage)
                     const favCourse = { userToken: currentUser[0].userToken, favCourse : currentCourse }
                     getBooksFromStorage.push(favCourse)
-                    dispatch(setFavCourse(getBooksFromStorage))
-                    const newFavList = [...favCourses, favCourse]
-                    dispatch(getUserCourses(newFavList))
+                    localStorage.setItem('favCourses', JSON.stringify(getBooksFromStorage))
+                    const newFavList = [...favoriteCourses, favCourse]
+                    getUserCourses(newFavList)
                 }
+                Swal.fire({
+                    text: 'added to favorite courses',
+                    icon: 'success'
+                })
 
             }
         } else {
@@ -61,28 +63,6 @@ const CoursesCard = () => {
                 
             })
         }
-
-        // if(isAuth){
-        //     if(favCourses.some(course=> course.id === currentCourse.id)){
-        //         dispatch(removeFavCourse(currentCourse))
-        //         Swal.fire({
-        //             title:'Card was deleted',
-        //             icon: 'success'
-        //         })
-        //     }else{
-        //         dispatch(setFavCourse(currentCourse))
-        //         Swal.fire({
-        //             title:'Added to favorites',
-        //             icon: 'success'
-        //         })
-        //     }
-            
-        // }else{
-           
-
-            
-        // }
-        
        
     }
 
@@ -119,7 +99,7 @@ const CoursesCard = () => {
                             filteredCourses.map((course, id) =>
                                 <div key={id + 1} className={styles.card}>
                                     <span className={styles.favoriteCardText}>Add to favorites</span>
-                                    <FavoriteIcon onClick={() => handleFavoriteCourse(course)} className={favCourses.some(favcourse => favcourse.favCourse.id === course.id) ? `${styles.favCard_active} ${styles.cards_favorites}` : styles.cards_favorites} />
+                                    <FavoriteIcon onClick={() => handleFavoriteCourse(course)} className={favoriteCourses.some(favcourse => favcourse.favCourse.id === course.id) ? `${styles.favCard_active} ${styles.cards_favorites}` : styles.cards_favorites} />
                                     <div className={styles.card_left}>
                                         <h2>{course.name}</h2>
                                         <span className={styles.mentor}>{course.mentor}</span>
@@ -140,7 +120,7 @@ const CoursesCard = () => {
                                         <div className={styles.card_buttons}>
                                             <Button variant='outlined'
                                                 color='secondary'
-                                                onClick={() => dispatch(setCourseModal(true))}
+                                                onClick={() => setCourseModal(true)}
                                             >sign up</Button>
                                         </div>
                                     </div>

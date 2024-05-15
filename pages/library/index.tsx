@@ -7,23 +7,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 import styles from './index.module.css'
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import useDispatchHook from "@/src/hooks/dispatchHook";
 import { books } from "@/src/store/features/books/booksInterfaces";
-import useSelectorHook from "@/src/hooks/selectorHook";
 import BooksModal from "@/src/components/booksModal/booksModal";
 import { getApi } from "@/src/utils/api";
 import PostModal, { IModal } from "@/src/components/postModal/postModal";
 import {TextField} from "@mui/material";
-import { setBooksModal, setCurrentBook, useBooks } from "@/src/store/features/books/books";
+import {useBooks } from "@/src/store/features/books/books";
 
 const Library = () => {
-    const dispatch = useDispatchHook()
-    // const { favorites, dropdown } = useSelectorHook((state) => state.books);
-    const favorites = useBooks((state)=> state.favorites)
-    const dropdown = useBooks((state)=> state.dropdown)
+    const {favorites, dropdown, setBooksModal, setCurrentBook} = useBooks((state)=> state)
     const [searchValue, setSeacrhValue] = useState('')
     const [page, setPage] = useState(1)
-    const isAuth = useSelectorHook((state) => state.auth.isAuth)
     const [postModal, setPostModal] = useState(false)
     const {data, isLoading} = useSWR(`http://localhost:3001/books?_page=${page}`, getApi)
     const pages = data === undefined ? 1 : Math.ceil(data.items / 10)

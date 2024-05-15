@@ -6,30 +6,29 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import QuizIcon from '@mui/icons-material/Quiz';
 import SchoolIcon from '@mui/icons-material/School';
 import PersonIcon from '@mui/icons-material/Person';
-import { IUserItem } from '@/src/store/features/auth/auth';
+import useAuth, { IUserItem } from '@/src/store/features/auth/auth';
 import LoginIcon from '@mui/icons-material/Login';
-import useSelectorHook from '@/src/hooks/selectorHook';
-import useDispatchHook from '@/src/hooks/dispatchHook';
-import { resetFavorites, setDropdown } from '@/src/store/features/books/books';
+import {  useBooks } from '@/src/store/features/books/books';
 import { Avatar, IconButton, Menu, MenuItem, Divider, ListItemIcon } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { logOut } from '@/src/store/features/auth/auth';
+// import { logOut } from '@/src/store/features/auth/auth';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { Settings } from '@mui/icons-material';
 import Link from 'next/link';
-import { resetCourses } from '@/src/store/features/courses/courses';
+import { useCourseStore } from '@/src/store/features/courses/courses';
+
 
 
 const LogedSidebar = () => {
     const icons = [<HomeIcon />, <LocalLibraryIcon />, <QuizIcon />,
     <SchoolIcon />, <PersonIcon />, <LoginIcon />]
-    const dropdown = useSelectorHook((state) => state.books.dropdown)
-    const dispatch = useDispatchHook()
+    const {dropdown, setDropdown, resetFavBooks} = useBooks((state) => state)
+    const logOut = useAuth((state)=> state.logOut)
     const [currentUser, setCurrentUser] = useState<IUserItem[]>();
     const navigate = useRouter()
-    const favCourses = useSelectorHook((state) => state.courses.favoriteCourses)
+    const {favoriteCourses, resetCourses} = useCourseStore()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const currentPage = navigate.pathname
@@ -44,9 +43,10 @@ const LogedSidebar = () => {
 
     const handleLogOut = () => {
         setAnchorEl(null)
-        dispatch(logOut())
-        dispatch(resetFavorites())
-        dispatch(resetCourses())
+        logOut()
+        localStorage.removeItem('loggedInUser')
+        resetFavBooks()
+        resetCourses()
         navigate.push('/')
         Swal.fire({
             text: 'you loged out from your account',
@@ -87,7 +87,7 @@ const LogedSidebar = () => {
                         </Link>
                     })}
                     <div className={styles.x_wrap}>
-                        <button className={styles.x} onClick={() => { dispatch(setDropdown(false)) }}>&#10006;</button>
+                        <button className={styles.x} onClick={() => { setDropdown(false) }}>&#10006;</button>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@ const LogedSidebar = () => {
                         <img src='/humoLogo.png' />
                         <h3>Humo Academy</h3>
                     </div>
-                    <div className={styles.dropdown_btn} onClick={() => { dispatch(setDropdown(true)) }}>
+                    <div className={styles.dropdown_btn} onClick={() => { setDropdown(true) }}>
                         &#9776; Menu
                     </div>
 
@@ -123,9 +123,9 @@ const LogedSidebar = () => {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar sx={{ width: 32, height: 32 }}>{currentUser !== undefined ? currentUser[0].userName[0].toUpperCase() : ''}</Avatar>
-                        <div className={favCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
-                            <span className={favCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
-                                {favCourses.length}
+                        <div className={favoriteCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
+                            <span className={favoriteCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
+                                {favoriteCourses.length}
                             </span>
                         </div>
                     </IconButton>
@@ -174,9 +174,9 @@ const LogedSidebar = () => {
                                 <SchoolIcon fontSize="small" />
                             </ListItemIcon>
                             My courses
-                            <div className={favCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
-                                <span className={favCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
-                                    {favCourses.length}
+                            <div className={favoriteCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
+                                <span className={favoriteCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
+                                    {favoriteCourses.length}
                                 </span>
                             </div>
                         </MenuItem>

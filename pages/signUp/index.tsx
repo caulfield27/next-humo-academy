@@ -1,19 +1,22 @@
 import styles from '../../styles/auth.module.css'
-import useSelectorHook from '@/src/hooks/selectorHook';
-import useDispatchHook from '@/src/hooks/dispatchHook';
 import { useState } from 'react';
-import { handleSignup } from '@/src/store/features/auth/auth';
+import useAuth, { handleSignup } from '@/src/store/features/auth/auth';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useBooks } from '@/src/store/features/books/books';
+import useSWR from 'swr';
+import { getUsers } from '@/src/utils/api';
+
 
 
 
 const SignUp = ()=>{
-    const dispatch = useDispatchHook()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullName] = useState('')
+    const {data} = useSWR('http://localhost:3001/users', getUsers)
+    const {setAuth, setCurrentUser} = useAuth()
     const navigate = useRouter()
     const [validation, setValidation] = useState({
     email: false,
@@ -21,11 +24,11 @@ const SignUp = ()=>{
     fullName:false
   });
 
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
+    const dropdown = useBooks((state)=> state.dropdown)
     
     const handleSignupSubmit = (e:any) =>{
         e.preventDefault()
-        dispatch(handleSignup(email, fullName,password, navigate))
+        handleSignup(email, fullName, password, navigate, data)
     }
 
     const isDataComplete = email.trim() !== '' && password.trim() !== '' && password.trim() !== '';

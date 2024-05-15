@@ -7,23 +7,19 @@ export interface quizTypes{
     isCorrect: boolean
 }
 
-export interface jsQuizInit{
-    jsQuestions:quizTypes[],
-    currentQuestionIndex: number,
-    result: number
+export interface IGlobalQuestions{
+    id:number,
+    name:string,
+    complexity: number,
+    img: string,
+    questions: quizTypes[]
 }
-export interface reactQuizInit{
-    reactQuestions:quizTypes[],
+
+export interface IQuizState{
+    questions:quizTypes[],
     currentQuestionIndex: number,
-    result: number
-}
-export interface htmlQuizInit{
-    htmlQuestions:quizTypes[],
-    currentQuestionIndex: number,
-    result: number
-}
-export interface pythonQuizInit{
-    pyQuestions:quizTypes[],
-    currentQuestionIndex: number,
-    result: number
+    currentQuiz: number,
+    result: number,
+    quizModal: boolean
+
 }

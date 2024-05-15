@@ -8,17 +8,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useSelectorHook from '@/src/hooks/selectorHook';
-import { setDropdown } from '@/src/store/features/books/books';
-import useDispatchHook from '@/src/hooks/dispatchHook';
+import { useBooks } from '@/src/store/features/books/books';
 
 
 const QuestSidebar = () => {
     const icons = [<HomeIcon/>,<LocalLibraryIcon/>,<QuizIcon/>,
     <SchoolIcon/>,<PersonIcon/>,<LoginIcon/>]
     const router = useRouter()
-    const dropdown = useSelectorHook((state)=> state.books.dropdown)
-    const dispatch = useDispatchHook()
+    const {dropdown, setDropdown} = useBooks((state)=> state)
     const currentPage = router.pathname;
 
     
@@ -35,7 +32,7 @@ const QuestSidebar = () => {
                         </Link>
                     })}
                     <div className={styles.x_wrap}>
-                        <button className={styles.x} onClick={() => { dispatch(setDropdown(false)) }}>&#10006;</button>
+                        <button className={styles.x} onClick={() => { setDropdown(false) }}>&#10006;</button>
                     </div>
                 </div>
 
@@ -44,7 +41,7 @@ const QuestSidebar = () => {
                         <img src='/humoLogo.png' />
                         <h3>Humo Academy</h3>
                     </div>
-                    <div className={styles.dropdown_btn} onClick={() => { dispatch(setDropdown(true)) }}>
+                    <div className={styles.dropdown_btn} onClick={() => { setDropdown(true) }}>
                         &#9776; Menu
                     </div>
 
