@@ -69,6 +69,10 @@ const CoursesCard = () => {
        
     }
 
+    const handleCourseModal = ()=>{
+        setCourseModal(true)
+        document.body.classList.add('open_modal')
+    }
 
     return (
         <>
@@ -123,7 +127,7 @@ const CoursesCard = () => {
                                         <div className={styles.card_buttons}>
                                             <Button variant='outlined'
                                                 color='secondary'
-                                                onClick={() => setCourseModal(true)}
+                                                onClick={handleCourseModal}
                                             >sign up</Button>
                                         </div>
                                     </div>

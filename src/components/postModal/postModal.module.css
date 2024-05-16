@@ -71,5 +71,12 @@
 }
 
 .postModal_body span{
-    color: red;    
+    color: rgb(243, 58, 58);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    font-family:'roboto', sans-serif;
+    font-size: 14px;
+    margin-top: -20px;
+
 }

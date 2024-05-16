@@ -1,36 +1,47 @@
 import styles from '../enterCourseModal/enterCourse.module.css'
 import { Button } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { useCourseStore } from '@/src/store/features/courses/courses'
-import { getFromStorage } from '@/src/utils/getFromStorage'
 
-interface IStudents{
+interface IStudents {
     name: string,
-    email:string,
+    email: string,
     phone: string
 }
 
-const CourseModal = ()=>{
-    const {courseModal, setCourseModal} = useCourseStore()
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
+const CourseModal = () => {
+    const { courseModal, setCourseModal } = useCourseStore()
+   
+    const [studentInfo, setStudentInfo] = useState({
+        name: '',
+        email: '',
+        phone: ''
+    })
+    
+    const [validation, setValidation] = useState({
+        name:false,
+        email: false,
+        phone: false
+    })   
 
+    const fields = [
+        { name: 'name', type: 'text', placeholder: 'enter your full name', value: studentInfo.name, isValid: validation.name },
+        { name: 'email', type: 'email', placeholder: 'enter your email', value: studentInfo.email, isValid: validation.email },
+        { name: 'phone', type: 'text', placeholder: 'enter your phone', value: studentInfo.phone, isValid: validation.phone}
+    ]
+   
 
-    const handleSubmit = (event: any) => {
-
-        event.preventDefault();
-
+    const handleSubmit = async (event: any) => {
+        event.preventDefault()
         const newStudent = {
-            name: name.trim(),
-            email: email.trim(),
-            phone: phone.trim()
+            name: studentInfo.name.trim(),
+            email: studentInfo.email.trim(),
+            phone: studentInfo.phone.trim()
         };
- 
-        
-        const getStudentsStorage = localStorage.getItem('students') 
-        const students:IStudents[] = getStudentsStorage ? JSON.parse(getStudentsStorage) : []
+
+        const getStudentsStorage = localStorage.getItem('students')
+        const students: IStudents[] = getStudentsStorage ? JSON.parse(getStudentsStorage) : []
         const alredySigned = students.some(
             (student) =>
                 student.name.toLowerCase() === newStudent.name.toLowerCase() &&
@@ -56,67 +67,67 @@ const CourseModal = ()=>{
         })
 
 
-        setName('');
-        setEmail('');
-        setPhone('');
+        setStudentInfo({ ...studentInfo, name: '', email: '', phone: '' })
         setCourseModal(false);
+    };
 
+
+
+const handleFillData = (e: any) => {
+    setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value })
+}
+
+
+
+
+const handleCloseModal = (e: any) => {
+    if (e.target.classList.contains(styles.coursesModal_container)) {
+        setCourseModal(false)
+        document.body.classList.remove('open_modal')
     }
 
+}
 
-    
+const handleFocus = (e: ChangeEvent<HTMLInputElement>) =>{
+    setValidation({...validation, [e.target.name]: false})
+}
 
-    const handleCloseModal = (e:any)=>{
-        if(e.target.classList.contains(styles.coursesModal_container)){
-            setCourseModal(false)
-        }
+const handleBlur = (e: ChangeEvent<HTMLInputElement>)=>{
+    setValidation({...validation, [e.target.name] : true})
+}   
 
+useEffect(() => {
+    document.addEventListener('click', handleCloseModal)
+    return () => {
+        document.removeEventListener('click', handleCloseModal)
     }
+}, [])
 
-    useEffect(()=>{
-        document.addEventListener('click', handleCloseModal)
-        return ()=>{
-            document.removeEventListener('click', handleCloseModal)
-        }
-    }, [])
+const isDataComplete = studentInfo.name.trim() !== '' && studentInfo.email.trim() !== '' && studentInfo.phone.trim() !== '';
 
-    const isDataComplete = name.trim() !== '' && email.trim() !== '' && phone.trim() !== ''; 
-
-    return (
-        <div className={courseModal ? `${styles.coursesModal_container} ${styles.display_block}` : styles.display_none}>
-            <div className={styles.courses_modal}>
-                <div className={styles.modal_header}>
-                    <center><h1>Sign up<br/>for Humo academy courses</h1></center>
-                    <img src='/humoLogo.png' alt="humo logo" />
-                </div>
-                <form className={styles.form} action="submit" onSubmit={handleSubmit}>
-                    <div className={styles.input_field} style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center'}}>
-                        <input className={styles.input} type="text" placeholder='Your name'
-                        value={name}
-                        name='name'
-                        onChange={(e)=> setName(e.target.value)}/>
-                    </div>
-                    <div className={styles.input_field} style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center'}}>
-                        <input className={styles.input} type="text" placeholder='Your email'
-                        value={email}
-                        name='email'
-                        onChange={(e)=> setEmail(e.target.value)}/>
-                    </div>
-                    <div className={styles.input_field}  style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center'}}>
-                        <input className={styles.input} type="text" placeholder='Your phone number'
-                        value={phone}
-                        name='phone'
-                        onChange={(e)=> setPhone(e.target.value) }/>
-                    </div>
-
-                    
-                    <Button disabled={!isDataComplete} type='submit'  variant='contained' color='error'>
-                        Sign up application
-                    </Button>
-                </form>
+return (
+    <div className={courseModal ? `${styles.coursesModal_container} ${styles.display_block}` : styles.display_none}>
+        <div className={styles.courses_modal}>
+            <div className={styles.modal_header}>
+                <center><h1>Sign up<br />for Humo academy courses</h1></center>
+                <img src='/humoLogo.png' alt="humo logo" />
             </div>
+            <form className={styles.form} action="submit" onSubmit={handleSubmit}>
+                {fields.map((field) =>
+                    <div className={styles.input_field} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                        key={field.name}>
+                        <input className={styles.input} type={field.type} placeholder={field.placeholder} value={field.value}
+                            name={field.name} onChange={handleFillData} onFocus={handleFocus} onBlur={handleBlur}/>
+                        {field.value === '' && field.isValid && <span>field required</span>}
+                    </div>
+                )}
+                <Button disabled={!isDataComplete} type='submit' variant='contained' color='error'>
+                    Sign up application
+                </Button>
+            </form>
         </div>
-    )
+    </div>
+)
 
 }
 

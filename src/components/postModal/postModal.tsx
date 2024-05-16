@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from 'react'
 import styles from './postModal.module.css'
 import { TextField } from '@mui/material'
@@ -68,7 +66,7 @@ const PostModal = ({page, setModal}: IModal) =>{
                             && postedData.description.trim() !== '' && isLInk(postedData.image) && isLInk(postedData.pdf)
                             && postedData.rating < 6;
                             
-
+    console.log(postedData)
 
     return (
         <div className={styles.postModal_container}>
@@ -81,38 +79,44 @@ const PostModal = ({page, setModal}: IModal) =>{
                 
                 <div className={styles.postModal_body}>
                     <TextField id="outlined-basic" name="name" label="name" variant="outlined" onChange={handleDataChange} 
+                    style={{position: 'relative'}}
                     onFocus={()=> setValidation({...validation, name: false})}
                     onBlur={()=> setValidation({...validation, name: true})}/>
                     {postedData.name === '' && validation.name && 
                         <span>required field</span>
                     }
                     <TextField id="outlined-basic" name="author" label="author" variant="outlined" onChange={handleDataChange}
+                    style={{position: 'relative'}}
                      onFocus={()=> setValidation({...validation, author: false})}
                      onBlur={()=> setValidation({...validation, author: true})}/>
                      {postedData.author === '' && validation.author && 
                          <span>required field</span>
                      }
                     <TextField id="outlined-basic" name="image" label="poster src" variant="outlined" onChange={handleDataChange}
+                    style={{position: 'relative'}}
                      onFocus={()=> setValidation({...validation, image: false})}
-                     onBlur={()=> setValidation({...validation, image: true})}/>
+                     onBlur={()=> setValidation({...validation, image: true})}>
+                        
+                     </TextField>
                      {postedData.image === '' && validation.image && 
                          <span>required field</span>
                      }
-                     {!isLInk(postedData.image) && validation.pdf && <span>field must be matched with link</span>}
+                     {postedData.image === '' ? '' : !isLInk(postedData.image) && validation.pdf && <span>field is not link</span>}
                     <TextField id="outlined-basic" name="pdf" label="pdf link" variant="outlined" onChange={handleDataChange}
+                     style={{position: 'relative'}}
                      onFocus={()=> setValidation({...validation, pdf: false})}
                      onBlur={()=> setValidation({...validation, pdf: true})}/>
                      {postedData.pdf === '' && validation.pdf && 
                          <span>required field</span>
                      }
-                     {!isLInk(postedData.pdf) && validation.pdf && <span>field must be matched with link</span>}
+                     {postedData.pdf === '' ? '' : !isLInk(postedData.pdf) && validation.pdf && <span>field is not link</span>}
                     <TextField type='number' name='rating' id="outlined-basic" label="rating" variant="outlined" onChange={handleDataChange}
                      onFocus={()=> setValidation({...validation, rating: false})}
                      onBlur={()=> setValidation({...validation, rating: true})}/>
                      {postedData.rating === null && validation.rating && 
                          <span>required field</span>
                      }
-                     {postedData.rating === null ? null :
+                     {postedData.rating === null ? '' :
                       postedData.rating > 5 && validation.rating && <span>rating can't be higher then 5</span>}
                     <TextField id="outlined-basic" name="released" label="released" variant="outlined" onChange={handleDataChange}
                      onFocus={()=> setValidation({...validation, released: false})}

@@ -1,4 +1,3 @@
-"use client"
 import styles from '../guestSidebar/questSidebar.module.css'
 import { logedLinks } from './userRoutes';
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,7 +11,6 @@ import {  useBooks } from '@/src/store/features/books/books';
 import { Avatar, IconButton, Menu, MenuItem, Divider, ListItemIcon } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-// import { logOut } from '@/src/store/features/auth/auth';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { Settings } from '@mui/icons-material';
