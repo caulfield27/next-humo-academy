@@ -1,3 +1,4 @@
+import { setToStorage } from "@/src/utils/getFromStorage";
 import Swal from "sweetalert2";
 import { create } from "zustand";
 
@@ -44,7 +45,7 @@ export const handleLogin = (email:string, password:string,
         if (loggedInUser.length > 0) {
             setAuth(true)
             setCurrentUser(loggedInUser)
-            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
+            setToStorage('loggedInUser', loggedInUser)
             navigate.push('/')
             Swal.fire({
                 title: "Loged in successful",

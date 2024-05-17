@@ -5,7 +5,7 @@ import { setUserFavCourse, useCourseStore } from "@/src/store/features/courses/c
 import { setUserFavBooks } from "@/src/store/features/books/books";
 import useAuth from "@/src/store/features/auth/auth";
 import { useBooks } from "@/src/store/features/books/books";
-import { getFromStorage } from "@/src/utils/getFromStorage";
+import { getFromStorage, setToStorage } from "@/src/utils/getFromStorage";
 
 
 const Layouts = ({children}:{children:React.ReactNode}) => {
@@ -13,6 +13,9 @@ const Layouts = ({children}:{children:React.ReactNode}) => {
     const {getUserFavorites} = useBooks()
     const {getUserCourses} = useCourseStore()
     const currentUser = useAuth((state)=> state.currentUser)
+    const getCounter = useCourseStore((state)=> state.getCounter)
+    const getBooksCounter = useBooks((state)=> state.getBooksCounter)
+    const courseNot = useCourseStore((state)=> state.favCounter)
 
     useEffect(() => {
         if (isAuth) {
@@ -21,6 +24,22 @@ const Layouts = ({children}:{children:React.ReactNode}) => {
         }
 
     }, [isAuth])
+
+    useEffect(()=>{
+        // setToStorage('favCourseCounter', courseNot)
+        // setToStorage('favBooksCounter', 0)
+        if(getFromStorage('favCourseCounter')){
+            getCounter(getFromStorage('favCourseCounter'))
+        }
+        if(getFromStorage('favBooksCounter')){
+            getBooksCounter(getFromStorage('favBooksCounter'))
+        }
+        
+        
+        
+        
+
+    }, [])
     
 
     return (

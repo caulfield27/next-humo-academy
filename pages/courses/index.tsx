@@ -1,3 +1,4 @@
+"use client"
 import styles from './index.module.css'
 import useSWR from 'swr';
 import { CircularProgress } from '@mui/material';
@@ -7,10 +8,11 @@ import CourseModal from '@/src/components/enterCourseModal/enterCourse';
 import Swal from 'sweetalert2'
 import { IFavCourse, coursesType } from '@/src/store/features/courses/coursesType';
 import { getCourses } from '@/src/utils/api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useBooks } from '@/src/store/features/books/books';
 import useAuth from '@/src/store/features/auth/auth';
 import { useCourseStore } from '@/src/store/features/courses/courses';
+import { getFromStorage, setToStorage } from '@/src/utils/getFromStorage';
 
 const CoursesCard = () => {
     const dropdown = useBooks((state)=> state.dropdown)
@@ -20,8 +22,12 @@ const CoursesCard = () => {
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const isAuth = useAuth((state)=> state.isAuth)
+    const incrementFavCounter = useCourseStore((state)=> state.incrementFavCounter)
+    const getCounter = useCourseStore((store)=> store.getCounter)
+    const decrementFavCounter = useCourseStore((state)=> state.decrementGFavCounter)
     const currentUser = useAuth((state)=> state.currentUser)
     const {data,isLoading } = useSWR<coursesType[]>('http://localhost:3002/courses', getCourses)
+    let favCounter = useCourseStore((state)=> state.favCounter)
     const courses = data 
     const filteredCourses = courses === undefined ? [] : courses.filter((course) => {
         const matchesSearch = course.name.toLowerCase().includes(search.toLowerCase());
@@ -30,27 +36,33 @@ const CoursesCard = () => {
     });
 
     const handleFavoriteCourse = (currentCourse:coursesType)=>{
-        const getFavStorage = localStorage.getItem('favCourses')
+        const getFavStorage = getFromStorage('favCourses')
     
         if (isAuth) {
             if (favoriteCourses.some(favCourse => favCourse.favCourse.id === currentCourse.id)) {
                 const filtered = favoriteCourses.filter((course) => course.favCourse.id !== currentCourse.id)
                 getUserCourses(filtered)
                 if(getFavStorage){
-                    const removeCourse = JSON.parse(getFavStorage).filter((curCourse:IFavCourse)  => curCourse.favCourse.id !== currentCourse.id)
-                    localStorage.setItem('favCourses', JSON.stringify(removeCourse))
+                    const removeCourse = getFavStorage.filter((curCourse:IFavCourse)  => curCourse.favCourse.id !== currentCourse.id)
+                    setToStorage('favCourses',removeCourse)
+                }
+                if(favCounter !== 0){
+                    decrementFavCounter(favCounter-=1)
                 }
                 
 
             } else {
                 if (getFavStorage) {
-                    const getBooksFromStorage = JSON.parse(getFavStorage)
                     const favCourse = { userToken: currentUser[0].userToken, favCourse : currentCourse }
-                    getBooksFromStorage.push(favCourse)
-                    localStorage.setItem('favCourses', JSON.stringify(getBooksFromStorage))
+                    getFavStorage.push(favCourse)
+                    setToStorage('favCourses', getFavStorage)
                     const newFavList = [...favoriteCourses, favCourse]
                     getUserCourses(newFavList)
+                    incrementFavCounter(favCounter+=1)
+                    
                 }
+
+            
                 Swal.fire({
                     text: 'added to favorite courses',
                     icon: 'success'

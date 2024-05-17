@@ -6,3 +6,7 @@ export function getFromStorage(data: string) {
         return parsedData
     }
 }
+
+export function setToStorage<DT>(key:string, data: DT){
+    localStorage.setItem(key,JSON.stringify(data))
+}

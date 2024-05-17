@@ -4,19 +4,31 @@ import CourseModal from '@/src/components/enterCourseModal/enterCourse'
 import { IFavCourse, coursesType } from '@/src/store/features/courses/coursesType'
 import React from 'react'
 import { useCourseStore } from '@/src/store/features/courses/courses'
+import { useEffect } from 'react'
+import { getFromStorage, setToStorage } from '@/src/utils/getFromStorage'
 
 const MyCourses = ()=>{
     const favoriteCourses = useCourseStore((state)=> state.favoriteCourses)
     const getUserCourses = useCourseStore((state)=> state.getUserCourses)
     const setCourseModal = useCourseStore((state)=> state.setCourseModal)
+    const decrementFavCounter = useCourseStore((state)=> state.decrementGFavCounter)
+    let favCounter = useCourseStore((state)=> state.favCounter)
+    const resetFavCounter = useCourseStore((state)=> state.resetFavCounter)
     
+    
+    useEffect(()=>{
+        resetFavCounter()
+        setToStorage('favCourseCounter', 0)
+
+    }, [])
     
     const handelRemove = (currentCourse: coursesType)=>{
         const filtered = favoriteCourses.filter((course) => course.favCourse.id !== currentCourse.id)
-        const getFavStorage = localStorage.getItem('favCourses')
+        const getFavStorage = getFromStorage('favCourses')
+        decrementFavCounter(favCounter-=1)
         if(getFavStorage){
-            const removeCourse = JSON.parse(getFavStorage).filter((removeCourse: IFavCourse)  => removeCourse.favCourse.id !== currentCourse.id)
-            localStorage.setItem('favCourses', JSON.stringify(removeCourse))
+            const removeCourse = getFavStorage.filter((removeCourse: IFavCourse)  => removeCourse.favCourse.id !== currentCourse.id)
+            setToStorage('favCourses', removeCourse)
         }
         getUserCourses(filtered)
     }

@@ -26,13 +26,17 @@ const LogedSidebar = () => {
     const logOut = useAuth((state)=> state.logOut)
     const [currentUser, setCurrentUser] = useState<IUserItem[]>();
     const navigate = useRouter()
+    const favCounter = useCourseStore((state)=> state.favCounter)
+    const resetFavCounter = useCourseStore((state)=> state.resetFavCounter)
     const {favoriteCourses, resetCourses} = useCourseStore()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const currentPage = navigate.pathname
+    console.log(favCounter)
 
     useEffect(() => {
         setCurrentUser(JSON.parse(String(localStorage.getItem("loggedInUser"))))
+        
     }, [])
 
     const handleClick = (event: any) => {
@@ -121,9 +125,9 @@ const LogedSidebar = () => {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar sx={{ width: 32, height: 32 }}>{currentUser !== undefined ? currentUser[0].userName[0].toUpperCase() : ''}</Avatar>
-                        <div className={favoriteCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
-                            <span className={favoriteCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
-                                {favoriteCourses.length}
+                        <div className={favCounter > 0 ? styles.indicator : styles.indicatorDisplayNone}>
+                            <span className={favCounter > 0 ? styles.indicator_count : styles.indicatorCountNone}>
+                                {favCounter}
                             </span>
                         </div>
                     </IconButton>
@@ -172,9 +176,9 @@ const LogedSidebar = () => {
                                 <SchoolIcon fontSize="small" />
                             </ListItemIcon>
                             My courses
-                            <div className={favoriteCourses.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
-                                <span className={favoriteCourses.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
-                                    {favoriteCourses.length}
+                            <div className={favCounter > 0 ? styles.indicator : styles.indicatorDisplayNone}>
+                                <span className={favCounter > 0 ? styles.indicator_count : styles.indicatorCountNone}>
+                                    {favCounter}
                                 </span>
                             </div>
                         </MenuItem>

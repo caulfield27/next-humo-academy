@@ -5,6 +5,7 @@ import { useBooks } from '@/src/store/features/books/books';
 import { quizes } from '@/src/store/features/quizes/quizUtils/questions';
 import { IGlobalQuestions } from '@/src/store/features/quizes/quizUtils/quizTypes';
 import { useQuizes } from '@/src/store/features/quizes/quizes';
+import { setToStorage } from '@/src/utils/getFromStorage';
 
 
 
@@ -20,7 +21,7 @@ const Quizes = () => {
     const OpenQuiz = (quiz:IGlobalQuestions) =>{
         navigate.push('/quizes/quiz')
         setQuestions(quiz)
-        localStorage.setItem('questions', JSON.stringify(quiz))
+        setToStorage('questions', quiz)
         resetQuiz()
     }
 

@@ -3,23 +3,30 @@
 import styles from './favorites.module.css'
 import {  useBooks } from '@/src/store/features/books/books';
 import { IFavBooks, books } from '@/src/store/features/books/booksInterfaces';
+import { getFromStorage, setToStorage } from '@/src/utils/getFromStorage';
+import { useEffect } from 'react';
 
 
 const Favorites = () => {
     const favorites = useBooks((state)=> state.favorites)
     const getUserFavorites = useBooks((state)=> state.getUserFavorites)
     const dropdown = useBooks((state)=> state.dropdown)
-   
+    const resetNot = useBooks((state)=> state.resetNotifications)
+    
     const handleRead = (event: any) =>{
         window.open(event.target.value, '_blank')
     }
 
+    useEffect(()=>{
+        resetNot(0)
+    })
+
     const handleDelete = (currentBook:books)=>{
         const filtered = favorites.filter((book) => book.currentBook.id !== currentBook.id)
-        const getFavStorage = localStorage.getItem('favorites')
+        const getFavStorage = getFromStorage('favorites')
         if(getFavStorage){
-            const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== currentBook.id)
-            localStorage.setItem('favorites',JSON.stringify(removedBook))
+            const removedBook = getFavStorage.filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== currentBook.id)
+            setToStorage('favorites',removedBook)
         }
         getUserFavorites(filtered)
     }

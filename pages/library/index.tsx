@@ -20,6 +20,7 @@ const Library = () => {
     const setBooksModal = useBooks((state)=> state.setBooksModal)
     const setCurrentBook = useBooks((state)=> state.setCurrentBook)
     const [searchValue, setSeacrhValue] = useState('')
+    const booksNotification = useBooks((state)=> state.booksNotifications)
     const [page, setPage] = useState(1)
     const [postModal, setPostModal] = useState(false)
     const {data, isLoading} = useSWR(`http://localhost:3001/books?_page=${page}`, getApi)
@@ -77,9 +78,9 @@ const Library = () => {
                     <Pagination className={styles.pagination} count={pages} page={page} onChange={handleChangePage} />
                     <div className={styles.favorite_wrap}>
                         <Link className={styles.favorite} href='/library/favorites'>Favorite books</Link>
-                        <div className={favorites.length > 0 ? styles.indicator : styles.indicatorDisplayNone}>
-                            <span className={favorites.length > 0 ? styles.indicator_count : styles.indicatorCountNone}>
-                                {favorites.length}
+                        <div className={booksNotification > 0 ? styles.indicator : styles.indicatorDisplayNone}>
+                            <span className={booksNotification > 0 ? styles.indicator_count : styles.indicatorCountNone}>
+                                {booksNotification}
                             </span>
                         </div>
                     </div>

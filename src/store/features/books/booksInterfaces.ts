@@ -13,7 +13,8 @@ export interface IStates{
     booksModal:boolean,
     dropdown: boolean,
     currentBook: books,
-    favorites: IFavBooks[]
+    favorites: IFavBooks[],
+    booksNotifications: number,
 }
 export interface IFavBooks{
     userToken:string | null,

@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Swal from 'sweetalert2'
 import { IFavBooks } from '@/src/store/features/books/booksInterfaces'
 import useAuth from '@/src/store/features/auth/auth'
+import { getFromStorage, setToStorage } from '@/src/utils/getFromStorage';
 
 export const BooksModal = () => {
     const currentBook = useBooks((state)=> state.currentBook)
@@ -14,6 +15,9 @@ export const BooksModal = () => {
     const favorites = useBooks((state)=> state.favorites)
     const setBooksModal = useBooks((state)=> state.setBooksModal)
     const getUserFavorites = useBooks((state)=> state.getUserFavorites)
+    let booksNotifications = useBooks((state)=> state.booksNotifications)
+    const incrementNot = useBooks((state)=> state.incrementCounter)
+    const decrementNot = useBooks((state)=> state.decrementCounter)
     const {isAuth, currentUser} = useAuth((state) => state)
     
 
@@ -36,28 +40,31 @@ export const BooksModal = () => {
     }, [])
 
     const handleFavorites = (book: any) => {
-        const getFavStorage = localStorage.getItem('favorites')
+        const getFavStorage = getFromStorage('favorites')
     
         if (isAuth) {
             if (favorites.some(favBook => favBook.currentBook.id === book.id)) {
                 const filtered = favorites.filter((book) => book.currentBook.id !== currentBook.id)
                 getUserFavorites(filtered)
+                if(booksNotifications !== 0){
+                    decrementNot(booksNotifications-=1)
+                }
                 if(getFavStorage){
-                    const removedBook = JSON.parse(getFavStorage).filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== book.id)
-                    localStorage.setItem('favorites', JSON.stringify(removedBook))
+                    const removedBook = getFavStorage.filter((removeBook: IFavBooks)  => removeBook.currentBook.id !== book.id)
+                    setToStorage('favorites', removedBook)
                     
                 }
                 
 
             } else {
                 if (getFavStorage) {
-                    const getBooksFromStorage = JSON.parse(getFavStorage)
                     const favBooks = { userToken: currentUser[0].userToken, currentBook: book }
-                    getBooksFromStorage.push(favBooks)
-                    localStorage.setItem('favorites', JSON.stringify(getBooksFromStorage))
+                    getFavStorage.push(favBooks)
+                    setToStorage('favorites', getFavStorage)
                     const newFavList = [...favorites, favBooks]
                     getUserFavorites(newFavList)
                 }
+                incrementNot(booksNotifications+=1)
 
             }
         } else {

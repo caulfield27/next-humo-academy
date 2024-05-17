@@ -3,6 +3,7 @@ import { Button } from '@mui/material'
 import { ChangeEvent, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { useCourseStore } from '@/src/store/features/courses/courses'
+import { getFromStorage, setToStorage } from '@/src/utils/getFromStorage'
 
 interface IStudents {
     name: string,
@@ -40,8 +41,8 @@ const CourseModal = () => {
             phone: studentInfo.phone.trim()
         };
 
-        const getStudentsStorage = localStorage.getItem('students')
-        const students: IStudents[] = getStudentsStorage ? JSON.parse(getStudentsStorage) : []
+        const getStudentsStorage = getFromStorage('students')
+        const students: IStudents[] = getStudentsStorage ? getStudentsStorage : []
         const alredySigned = students.some(
             (student) =>
                 student.name.toLowerCase() === newStudent.name.toLowerCase() &&
@@ -59,7 +60,7 @@ const CourseModal = () => {
         }
 
         const currentStudents = [...students, newStudent];
-        localStorage.setItem('students', JSON.stringify(currentStudents));
+        setToStorage('students', currentStudents)
         Swal.fire({
             title: 'form successed',
             text: 'your application confirmed succesfully',
